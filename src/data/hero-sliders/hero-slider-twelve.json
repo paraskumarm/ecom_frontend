@@ -1,0 +1,25 @@
+[{
+  "id": 3,
+  "image": "http://localhost:8000/media/images/blackshirt1_lbdAait.jpg",
+  "subtitle": "Final Sale",
+  "text": "40% off Summer Vacation",
+  "title": "New Arrival",
+  "url": "/shop-grid-standard"
+},
+  {
+    "id": 1,
+    "title": "New Arrival",
+    "subtitle": "Final Sale",
+    "text": "30% off Summer Vacation",
+    "image": "/assets/img/slider/slider-3.jpg",
+    "url": "/shop-grid-standard"
+  },
+  {
+    "id": 2,
+    "title": "New Arrival",
+    "subtitle": "Final Sale",
+    "text": "40% off Summer Vacation",
+    "image": "/assets/img/slider/slider-4.jpg",
+    "url": "/shop-grid-standard"
+  }
+]
