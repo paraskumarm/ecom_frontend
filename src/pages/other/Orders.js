@@ -16,6 +16,7 @@ import {
 } from "../../redux/actions/cartActions";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { isAuthenticated } from "../../helpers/auth";
 
 const Orders = ({
   location,
@@ -36,6 +37,7 @@ const Orders = ({
       quantity_info: [],
       color_info: [],
       size_info: [],
+      status_info: [],
       isPaid: false,
       created_at: "",
       updated_at: "",
@@ -139,19 +141,24 @@ const Orders = ({
         } else {
           data.reverse();
           console.log(data);
-          for(let i=0;i<data.length;i++){
-          let quantity_info = data[i].quantity_info;
-          quantity_info = quantity_info.slice(1, quantity_info.length - 1);
-          quantity_info = quantity_info.split(",");
-          let color_info = data[i].color_info;
-          color_info = color_info.slice(1, color_info.length - 1);
-          color_info = color_info.split(",");
-          let size_info = data[i].size_info;
-          size_info = size_info.slice(1, size_info.length - 1);
-          size_info = size_info.split(",");
-          data[i].color_info = color_info;
-          data[i].size_info = size_info;
-          data[i].quantity_info = quantity_info;}
+          for (let i = 0; i < data.length; i++) {
+            let quantity_info = data[i].quantity_info;
+            quantity_info = quantity_info.slice(1, quantity_info.length - 1);
+            quantity_info = quantity_info.split(",");
+            let color_info = data[i].color_info;
+            color_info = color_info.slice(1, color_info.length - 1);
+            color_info = color_info.split(",");
+            let size_info = data[i].size_info;
+            size_info = size_info.slice(1, size_info.length - 1);
+            size_info = size_info.split(",");
+            let status_info = data[i].status_info;
+            // status_info = status_info.slice(1, status_info.length - 1);
+            status_info = status_info.split(",");
+            data[i].color_info = color_info;
+            data[i].size_info = size_info;
+            data[i].quantity_info = quantity_info;
+            data[i].status_info = status_info;
+          }
           setorders(data);
         }
       })
@@ -184,7 +191,7 @@ const Orders = ({
 
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
-            {orders && orders.length >= 1 ? (
+            {isAuthenticated() && orders && orders.length >= 1 ? (
               <Fragment>
                 <h3 className="cart-page-title">Your Order History</h3>
 
@@ -203,10 +210,8 @@ const Orders = ({
                           </tr>
                         </thead>
                         <tbody>
-                          
                           {orders.map((order) => {
-                            return(
-                            order.products.map((cartItem, key) => {
+                            return order.products.map((cartItem, key) => {
                               const discountedPrice = getDiscountPrice(
                                 cartItem.price,
                                 cartItem.discount
@@ -217,7 +222,7 @@ const Orders = ({
                               const finalDiscountedPrice = (
                                 discountedPrice * currency.currencyRate
                               ).toFixed(2);
-  
+
                               discountedPrice != null
                                 ? (cartTotalPrice +=
                                     finalDiscountedPrice * cartItem.quantity)
@@ -235,13 +240,14 @@ const Orders = ({
                                       <img
                                         className="img-fluid"
                                         src={
-                                          process.env.PUBLIC_URL + cartItem.image1
+                                          process.env.PUBLIC_URL +
+                                          cartItem.image1
                                         }
                                         alt=""
                                       />
                                     </Link>
                                   </td>
-  
+
                                   <td className="product-name">
                                     <Link
                                       to={
@@ -269,60 +275,48 @@ const Orders = ({
                                       ""
                                     )}
                                   </td>
-  
+
                                   <td className="product-price-cart">
                                     {discountedPrice !== null ? (
                                       <Fragment>
                                         <span className="amount old">
-                                          {currency.currencySymbol +
-                                            finalProductPrice}
+                                          {"Rs." + finalProductPrice}
                                         </span>
                                         <span className="amount">
-                                          {currency.currencySymbol +
-                                            finalDiscountedPrice}
+                                          {"Rs." + finalDiscountedPrice}
                                         </span>
                                       </Fragment>
                                     ) : (
                                       <span className="amount">
-                                        {currency.currencySymbol +
-                                          finalProductPrice}
+                                        {"Rs." + finalProductPrice}
                                       </span>
                                     )}
                                   </td>
-  
+
                                   <td className="product-quantity">
                                     {order.quantity_info[key]}
                                   </td>
                                   <td className="product-subtotal">
                                     {discountedPrice !== null
-                                      ? currency.currencySymbol +
+                                      ? "Rs." +
                                         (
                                           finalDiscountedPrice *
                                           order.quantity_info[key]
                                         ).toFixed(2)
-                                      : currency.currencySymbol +
+                                      : "Rs." +
                                         (
                                           finalProductPrice *
                                           order.quantity_info[key]
                                         ).toFixed(2)}
                                   </td>
-  
+
                                   <td className="product-remove">
-                                    <button
-                                      onClick={() =>
-                                        deleteFromCart(cartItem, addToast)
-                                      }
-                                    >
-                                      {/* <i className="fa fa-times"></i> */}
-                                      Dispatched
-                                    </button>
+                                    {order.status_info[key]}
                                   </td>
                                 </tr>
                               );
-                            })
-                            )
+                            });
                           })}
-                        
                         </tbody>
                       </table>
                     </div>
@@ -351,12 +345,23 @@ const Orders = ({
                     <div className="item-empty-area__icon mb-30">
                       <i className="pe-7s-cart"></i>
                     </div>
-                    <div className="item-empty-area__text">
-                      No items found in Order History <br />{" "}
-                      <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                        Shop Now
-                      </Link>
-                    </div>
+                    {isAuthenticated() ? (
+                      <div className="item-empty-area__text">
+                        No items found in Order History <br />{" "}
+                        <Link
+                          to={process.env.PUBLIC_URL + "/shop-grid-standard"}
+                        >
+                          Shop Now
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="item-empty-area__text">
+                        Login First <br />{" "}
+                        <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                          Login Now
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

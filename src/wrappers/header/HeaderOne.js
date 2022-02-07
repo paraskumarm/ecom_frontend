@@ -12,7 +12,7 @@ const HeaderOne = ({
   borderStyle,
   headerPaddingClass,
   headerPositionClass,
-  headerBgClass
+  headerBgClass,
 }) => {
   const [scroll, setScroll] = useState(0);
   const [headerTop, setHeaderTop] = useState(0);
@@ -36,19 +36,6 @@ const HeaderOne = ({
         headerPositionClass ? headerPositionClass : ""
       }`}
     >
-      <div
-        className={`${headerPaddingClass ? headerPaddingClass : ""} ${
-          top === "visible" ? "d-none d-lg-block" : "d-none"
-        } header-top-area ${
-          borderStyle === "fluid-border" ? "border-none" : ""
-        }`}
-      >
-        <div className={layout === "container-fluid" ? layout : "container"}>
-          {/* header top */}
-          <HeaderTop borderStyle={borderStyle} />
-        </div>
-      </div>
-
       <div
         className={` ${
           headerPaddingClass ? headerPaddingClass : ""
@@ -84,7 +71,7 @@ HeaderOne.propTypes = {
   headerPaddingClass: PropTypes.string,
   headerPositionClass: PropTypes.string,
   layout: PropTypes.string,
-  top: PropTypes.string
+  top: PropTypes.string,
 };
 
 export default HeaderOne;

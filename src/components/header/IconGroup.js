@@ -76,10 +76,10 @@ const IconGroup = ({
                 </li>
                 <li>
                   <Link
-                    to={process.env.PUBLIC_URL + "/home-fashion-four"}
+                    to={process.env.PUBLIC_URL + "/"}
                     onClick={() => {
                       signout(() => {
-                        history.push("/home-fashion-four");
+                        history.push("/");
                       });
                     }}
                   >

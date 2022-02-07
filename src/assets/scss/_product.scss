@@ -1876,7 +1876,7 @@
     top: 5%;
     right: 5%;
     bottom: 5%;
-    left: 5%;
+    left: -10%;
 
     visibility: hidden;
 
@@ -1961,7 +1961,7 @@
           border: none;
           border-radius: 50px;
           background: none;
-          background-color: #17a2b8;
+          background-color: #a749ff;
           &:hover,
           &.active {
             background-color: #ed2e2e;
@@ -2326,7 +2326,7 @@
     text-align: center;
 
     opacity: 1;
-    background: none repeat scroll 0 0 #17a2b8;
+    background: none repeat scroll 0 0 #a749ff;
     .pro-same-action {
       margin: 0 2px;
       a,

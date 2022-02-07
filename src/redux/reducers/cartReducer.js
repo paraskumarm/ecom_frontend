@@ -13,13 +13,14 @@ const cartReducer = (state = initState, action) => {
   const cartItems = state,
     product = action.payload;
   console.log("state", state);
-  let cart=[]
+  let cart = [];
   if (action.type === FETCH_CART_SUCCESS) {
     return product;
   }
   if (action.type === ADD_TO_CART) {
     // for non variant products
     // console.log("cartItems", cartItems);
+    console.log("id is....",action);
     if (product.variation === undefined) {
       const cartItem = cartItems.filter((item) => item.id === product.id)[0];
       if (cartItem === undefined) {
@@ -28,7 +29,7 @@ const cartReducer = (state = initState, action) => {
           {
             ...product,
             quantity: product.quantity ? product.quantity : 1,
-            cartItemId: uuid(),
+            cartItemId: action.cartItemid,
           },
         ];
       } else {
@@ -54,14 +55,14 @@ const cartReducer = (state = initState, action) => {
           product.selectedProductSize === item.selectedProductSize &&
           (product.cartItemId ? product.cartItemId === item.cartItemId : true)
       )[0];
-
+      console.log("when cart is undefined.....", product);
       if (cartItem === undefined) {
         return [
           ...cartItems,
           {
             ...product,
             quantity: product.quantity ? product.quantity : 1,
-            cartItemId: uuid(),
+            cartItemId: action.cartItemid,
           },
         ];
       } else if (
@@ -74,7 +75,7 @@ const cartReducer = (state = initState, action) => {
           {
             ...product,
             quantity: product.quantity ? product.quantity : 1,
-            cartItemId: uuid(),
+            cartItemId: action.cartItemid,
           },
         ];
       } else {

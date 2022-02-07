@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Swiper from "react-id-swiper";
 import sliderData from "../../data/hero-sliders/hero-slider-twelve.json";
 
-import { getHeroSliders } from "../../helpers/getHeroSliders";
 import HeroSliderTwelveSingle from "../../components/hero-slider/HeroSliderTwelveSingle.js";
 import { useState } from "react";
 
@@ -40,21 +39,6 @@ const HeroSliderTwelve = () => {
   };
   
 
-  const loadAllProducts = () => {
-    getHeroSliders().then((data) => {
-      if (data.error) {
-        // setError(data.error);
-        console.log(data.error);
-      } else {
-        console.log("SLIDER DATA",data);
-        // setsliderData(data);
-      }
-    });
-  };
-
-  useEffect(() => {
-    loadAllProducts();
-  },[]);
 
   return (
     <div className="slider-area">

@@ -165,18 +165,15 @@ const Compare = ({
                                   {discountedPrice !== null ? (
                                     <Fragment>
                                       <span className="amount old">
-                                        {currency.currencySymbol +
-                                          finalProductPrice}
+                                        {"Rs." + finalProductPrice}
                                       </span>
                                       <span className="amount">
-                                        {currency.currencySymbol +
-                                          finalDiscountedPrice}
+                                        {"Rs." + finalDiscountedPrice}
                                       </span>
                                     </Fragment>
                                   ) : (
                                     <span className="amount">
-                                      {currency.currencySymbol +
-                                        finalProductPrice}
+                                      {"Rs." + finalProductPrice}
                                     </span>
                                   )}
                                 </td>

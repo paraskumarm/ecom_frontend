@@ -15,7 +15,7 @@ const ProductGridSingleFive = ({
   wishlistItem,
   compareItem,
   sliderClassName,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -39,7 +39,9 @@ const ProductGridSingleFive = ({
           }`}
         >
           <div className="product-img">
-            <Link to={process.env.PUBLIC_URL + "/product-tab-left/" + product.id}>
+            <Link
+              to={process.env.PUBLIC_URL + "/product-tab-left/" + product.id}
+            >
               <img
                 className="default-img"
                 src={process.env.PUBLIC_URL + product.image[0]}
@@ -64,7 +66,11 @@ const ProductGridSingleFive = ({
                 <div className="product-title">
                   <h3>
                     <Link
-                      to={process.env.PUBLIC_URL + "/product-tab-left/" + product.id}
+                      to={
+                        process.env.PUBLIC_URL +
+                        "/product-tab-left/" +
+                        product.id
+                      }
                     >
                       {product.name}
                     </Link>
@@ -73,15 +79,11 @@ const ProductGridSingleFive = ({
                 <div className="price-3">
                   {discountedPrice !== null ? (
                     <Fragment>
-                      <span>
-                        {currency.currencySymbol + finalDiscountedPrice}
-                      </span>{" "}
-                      <span className="old">
-                        {currency.currencySymbol + finalProductPrice}
-                      </span>
+                      <span>{"Rs." + finalDiscountedPrice}</span>{" "}
+                      <span className="old">{"Rs." + finalProductPrice}</span>
                     </Fragment>
                   ) : (
-                    <span>{currency.currencySymbol + finalProductPrice} </span>
+                    <span>{"Rs." + finalProductPrice} </span>
                   )}
                 </div>
                 <div className="product-action-3">
@@ -204,7 +206,7 @@ ProductGridSingleFive.propTypes = {
   product: PropTypes.object,
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingleFive;

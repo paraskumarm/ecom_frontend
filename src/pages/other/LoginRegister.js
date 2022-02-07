@@ -26,7 +26,7 @@ const LoginRegister = ({ location }) => {
   const PerformRedirect = () => {
     if (isAuthenticated()) {
       console.log("please redirect");
-      return <Redirect to="/home-fashion-four" />;
+      return <Redirect to="/" />;
     }
   };
 
@@ -219,7 +219,7 @@ const LoginRegister = ({ location }) => {
                               <input
                                 type="password"
                                 name="user-password"
-                                placeholder="Password-length should be greater than 5"
+                                placeholder="Password length should be greater than 5"
                                 value={password}
                                 onChange={handleChange("password")}
                               />
@@ -246,7 +246,7 @@ const LoginRegister = ({ location }) => {
             </div>
           </div>
         </div>
-        <p className="text-center">{JSON.stringify(values)}</p>
+        {/* <p className="text-center">{JSON.stringify(values)}</p> */}
       </LayoutOne>
       {PerformRedirect()}
     </Fragment>

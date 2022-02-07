@@ -8,10 +8,10 @@ import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { getDiscountPrice } from "../../helpers/product";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
-// import PaymentB from "./PaymentB";
 import { isAuthenticated } from "../../helpers/auth";
-import PaymentP from "./PaymentP";
+
 import { postAddress } from "../../helpers/postAddress";
+import { processPayment } from "../../helpers/paymentHepler";
 
 const Checkout = ({ location, cartItems, currency }) => {
   const { pathname } = location;
@@ -26,6 +26,8 @@ const Checkout = ({ location, cartItems, currency }) => {
     email: "",
   });
   const [error, seterror] = useState(false);
+  const [save, setsave] = useState(false);
+  const [processpay, setprocesspay] = useState(false);
   const {
     first_name,
     last_name,
@@ -62,9 +64,69 @@ const Checkout = ({ location, cartItems, currency }) => {
           console.log("addreess_id", response.address_id);
           let address_id = response.address_id;
           localStorage.setItem("address_id", JSON.stringify(address_id));
+          setsave(true);
         }
       })
       .catch((e) => console.log(e));
+  };
+  const startPayment = () => {
+    // console.log(eve)
+    console.log(error, "payment processing...");
+    let product_names = "";
+    let total_products = 0;
+    let total_amount = 0;
+    let pkarr = [];
+    let quantity_info = [];
+    let color_info = [];
+    let size_info = [];
+    let status_info = [];
+    const addressId = localStorage.getItem("address_id");
+    console.log(cartItems);
+    cartItems.forEach(function (item) {
+      product_names += item.name + "QTY=" + item.quantity + ", ";
+      total_products += item.quantity;
+      total_amount +=
+        (item.price - (item.discount / 100) * item.price) * item.quantity;
+      pkarr.push(item.id);
+      quantity_info.push(item.quantity);
+      color_info.push(item.selectedProductColor);
+      size_info.push(item.selectedProductSize);
+      status_info.push("Order Recieved");
+    });
+    console.log(pkarr);
+    pkarr = JSON.stringify(pkarr);
+    quantity_info = JSON.stringify(quantity_info);
+    color_info = JSON.stringify(color_info);
+    size_info = JSON.stringify(size_info);
+    console.log("product_names", product_names);
+    console.log("total_products", total_products);
+    console.log("total_amount", total_amount);
+    console.log("pkarr", pkarr);
+    console.log("color_info", color_info);
+    console.log("size_info", size_info);
+    console.log("status_info", status_info);
+    console.log("address_id", addressId);
+    const userId = isAuthenticated() && isAuthenticated().user.id;
+    const token = isAuthenticated() && isAuthenticated().token;
+    // console.log(JSON.parse(address_id)[0].address);
+    // send data to the backend
+    let bodyData = new FormData();
+    // JSON.stringify(product_info)
+    bodyData.append("product_names", product_names);
+    bodyData.append("total_products", total_products);
+    bodyData.append("total_amount", total_amount);
+    bodyData.append("pkarr", pkarr);
+    bodyData.append("quantity_info", quantity_info);
+    bodyData.append("color_info", color_info);
+    bodyData.append("size_info", size_info);
+    bodyData.append("status_info", status_info);
+    setprocesspay(true);
+    seterror(false);
+    processPayment(userId, token, addressId, bodyData)
+      .then((res) => {
+        console.log("Payment_Successful", res);
+      })
+      .catch((err) => console.log(err));
   };
   const errorMessageSave = () => {
     return (
@@ -75,6 +137,20 @@ const Checkout = ({ location, cartItems, currency }) => {
             style={{ display: error ? "" : "none" }}
           >
             All Fields are mandatory
+          </div>
+        </div>
+      </div>
+    );
+  };
+  const processMessage = () => {
+    return (
+      <div className="row">
+        <div className="col-md text-left">
+          <div
+            className="alert alert-success"
+            style={{ display: processpay ? "" : "none" }}
+          >
+            Payment Processing...
           </div>
         </div>
       </div>
@@ -93,8 +169,8 @@ const Checkout = ({ location, cartItems, currency }) => {
                 ? "No items found in cart to checkout "
                 : "Login First"}
               <br />{" "}
-              <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                Shop Now
+              <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                Login Now
               </Link>
             </div>
           </div>
@@ -115,6 +191,7 @@ const Checkout = ({ location, cartItems, currency }) => {
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Checkout
       </BreadcrumbsItem>
+      {console.log("process", process)}
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
         <Breadcrumb />
@@ -125,8 +202,7 @@ const Checkout = ({ location, cartItems, currency }) => {
               <div className="row">
                 <div className="col-lg-7">
                   <div className="billing-info-wrap">
-                    {errorMessageSave()}
-                    <h3>Billing Details</h3>
+                    <h3>Fill Billing Details</h3>
                     <div className="row">
                       <div className="col-lg-6 col-md-6">
                         <div className="billing-info mb-20">
@@ -213,13 +289,35 @@ const Checkout = ({ location, cartItems, currency }) => {
                       </div>
                     </div>
                   </div>
-                  <button
-                    className="btn btn-block btn-info"
-                    onClick={saveAddress}
-                  >
-                    Save
-                  </button>
-                  <p className="text-center">{JSON.stringify(values)}</p>
+                  {errorMessageSave()}
+                  {processMessage()}
+                  <div className="your-order-area">
+                    {save ? (
+                      <div className="row">
+                        <div className="place-order mt-25 col-6">
+                          <button
+                            className="btn-hover "
+                            onClick={() => {
+                              setsave(false);
+                            }}
+                          >
+                            Edit
+                          </button>
+                        </div>
+                        <div className="place-order mt-25 col-6">
+                          <button className="btn-hover" onClick={startPayment}>
+                            Make Payment
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="place-order mt-25">
+                        <button className="btn-hover" onClick={saveAddress}>
+                          Save
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="col-lg-5">
@@ -259,12 +357,12 @@ const Checkout = ({ location, cartItems, currency }) => {
                                   </span>{" "}
                                   <span className="order-price">
                                     {discountedPrice !== null
-                                      ? currency.currencySymbol +
+                                      ? "Rs." +
                                         (
                                           finalDiscountedPrice *
                                           cartItem.quantity
                                         ).toFixed(2)
-                                      : currency.currencySymbol +
+                                      : "Rs." +
                                         (
                                           finalProductPrice * cartItem.quantity
                                         ).toFixed(2)}
@@ -284,17 +382,12 @@ const Checkout = ({ location, cartItems, currency }) => {
                         <div className="your-order-total">
                           <ul>
                             <li className="order-total">Total</li>
-                            <li>
-                              {currency.currencySymbol +
-                                cartTotalPrice.toFixed(2)}
-                            </li>
+                            <li>{"Rs." + cartTotalPrice.toFixed(2)}</li>
                           </ul>
                         </div>
                       </div>
                       <div className="payment-method"></div>
                     </div>
-                    {/* <PaymentB products={cartItems} /> */}
-                    <PaymentP products={cartItems} />
                   </div>
                 </div>
               </div>

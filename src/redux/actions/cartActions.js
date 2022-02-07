@@ -1,7 +1,9 @@
 import Axios from "axios";
 import { API } from "../../backend";
+import uuid from "uuid/v4";
 import { addToUserCart } from "../../helpers/addToUserCart";
 import { isAuthenticated } from "../../helpers/auth";
+import { deleteFromUserCart } from "../../helpers/deleteFromUserCart";
 // import { getCartUrl } from "../../helpers/getCartUrl";
 
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -19,10 +21,10 @@ const fetchCartSuccess = (cart) => ({
 // fetch cart
 export const fetchCart = () => {
   let UserId = isAuthenticated() && isAuthenticated().user.id;
-
+  console.log("fetching cart...");
   return (dispatch) => {
     if (UserId) {
-      Axios.get(`${API}cart/?user=${UserId}`)
+      Axios.get(`${API}usercart/?user=${UserId}`)
         .then((response) => {
           let cart = response.data;
           for (let i = 0; i < cart.length; i++) {
@@ -45,8 +47,8 @@ export const fetchCart = () => {
             arr[i].selectedProductColor = cart[i].selectedProductColor;
             arr[i].selectedProductSize = cart[i].selectedProductSize;
             arr[i].quantity = cart[i].quantity;
-            arr[i].id = String(cart[i].id);
-            arr[i].cartItemId = String(UserId);
+            arr[i].id = String(UserId);
+            arr[i].cartItemId = String(cart[i].id);
           }
           console.log(arr);
           dispatch(fetchCartSuccess(arr));
@@ -71,7 +73,27 @@ export const addToCart = (
 ) => {
   // console.log("YII");
   console.log("ITEM", item);
-  addToUserCart(UserId, token);
+  // let cartid =uuid();
+  // let usercartid=0;
+  if (UserId) {
+    addToUserCart(
+      UserId,
+      token,
+      item.id,
+      quantityCount,
+      selectedProductColor,
+      selectedProductSize
+    )
+      .then((response) => {
+        // console.log(response);
+        cartid = response.id;
+        localStorage.setItem("cartid", cartid);
+      })
+      .catch((e) => console.log(e));
+  }
+  let cartid=uuid();
+  console.log("cart adding..", cartid);
+
   return (dispatch) => {
     if (addToast) {
       addToast("Added To Cart", { appearance: "success", autoDismiss: true });
@@ -93,6 +115,7 @@ export const addToCart = (
           ? item.selectedProductSize
           : null,
       },
+      cartItemid: cartid,
     });
   };
 };
@@ -111,6 +134,12 @@ export const decreaseQuantity = (item, addToast) => {
 };
 //delete from cart
 export const deleteFromCart = (item, addToast) => {
+  console.log("deleting from cart....", item.cartItemId);
+  if (UserId) {
+    deleteFromUserCart(item.cartItemId)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  }
   return (dispatch) => {
     if (addToast) {
       addToast("Removed From Cart", { appearance: "error", autoDismiss: true });

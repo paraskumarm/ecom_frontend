@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   productData: productReducer,
   cartData: cartReducer,
   wishlistData: wishlistReducer,
-  compareData: compareReducer
+  compareData: compareReducer,
 });
 
 export default rootReducer;

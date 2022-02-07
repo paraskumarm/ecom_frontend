@@ -51,8 +51,8 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                     <h6>Qty: {single.quantity}</h6>
                     <span>
                       {discountedPrice !== null
-                        ? currency.currencySymbol + finalDiscountedPrice
-                        : currency.currencySymbol + finalProductPrice}
+                        ? "Rs." + finalDiscountedPrice
+                        : "Rs." + finalProductPrice}
                     </span>
                     {single.selectedProductColor &&
                     single.selectedProductSize ? (
@@ -77,7 +77,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
             <h4>
               Total :{" "}
               <span className="shop-total">
-                {currency.currencySymbol + cartTotalPrice.toFixed(2)}
+                {"Rs." + cartTotalPrice.toFixed(2)}
               </span>
             </h4>
           </div>
@@ -103,7 +103,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
 MenuCart.propTypes = {
   cartData: PropTypes.array,
   currency: PropTypes.object,
-  deleteFromCart: PropTypes.func
+  deleteFromCart: PropTypes.func,
 };
 
 export default MenuCart;

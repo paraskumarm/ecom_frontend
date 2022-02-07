@@ -22,12 +22,10 @@ const store = createStore(
   load(),
   composeWithDevTools(applyMiddleware(thunk, save()))
 );
-// getHeroSliders
-// let cartUrl=getCartUrl();
 // fetch products from json file
 
 store.dispatch(fetchProducts());
-// store.dispatch(fetchCart());
+store.dispatch(fetchCart());
 
 ReactDOM.render(
   <Provider store={store}>

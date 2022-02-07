@@ -15,7 +15,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
       <nav>
         <ul>
           <li>
-            <Link to={process.env.PUBLIC_URL + "/home-fashion-four"}>
+            <Link to={process.env.PUBLIC_URL + "/"}>
               {strings["home"]}
               {sidebarMenu ? (
                 <span>
@@ -76,6 +76,11 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
               <li>
                 <Link to={process.env.PUBLIC_URL + "/compare"}>
                   {strings["compare"]}
+                </Link>
+              </li>
+              <li>
+                <Link to={process.env.PUBLIC_URL + "/orders"}>
+                  Order History
                 </Link>
               </li>
               <li>

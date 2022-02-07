@@ -81,70 +81,70 @@ const App = (props) => {
                 {/* Homepages */}
 
                 <Route
-                  path={process.env.PUBLIC_URL + "/home-fashion-four"}
+                  exact path={process.env.PUBLIC_URL + "/"}
                   component={HomeFashionFour}
                 />
 
                 {/* Shop pages */}
                 <Route
-                  path={process.env.PUBLIC_URL + "/shop-grid-standard"}
+                  exact path={process.env.PUBLIC_URL + "/shop-grid-standard"}
                   component={ShopGridStandard}
                 />
 
                 {/* Shop product pages */}
 
                 <Route
-                  path={process.env.PUBLIC_URL + "/product-tab-left/:id"}
+                   path={process.env.PUBLIC_URL + "/product-tab-left/:id"}
                   component={ProductTabLeft}
                 />
 
                 {/* Blog pages */}
                 <Route
-                  path={process.env.PUBLIC_URL + "/blog-standard"}
+                  exact path={process.env.PUBLIC_URL + "/blog-standard"}
                   component={BlogStandard}
                 />
 
                 {/* Other pages */}
                 <Route
-                  path={process.env.PUBLIC_URL + "/about"}
+                  exact path={process.env.PUBLIC_URL + "/about"}
                   component={About}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/contact"}
+                  exact path={process.env.PUBLIC_URL + "/contact"}
                   component={Contact}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/my-account"}
+                  exact path={process.env.PUBLIC_URL + "/my-account"}
                   component={MyAccount}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/login-register"}
+                  exact path={process.env.PUBLIC_URL + "/login-register"}
                   component={LoginRegister}
                 />
 
                 <Route
-                  path={process.env.PUBLIC_URL + "/cart"}
+                  exact path={process.env.PUBLIC_URL + "/cart"}
                   component={Cart}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/wishlist"}
+                  exact path={process.env.PUBLIC_URL + "/wishlist"}
                   component={Wishlist}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/compare"}
+                  exact path={process.env.PUBLIC_URL + "/compare"}
                   component={Compare}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/checkout"}
+                  exact path={process.env.PUBLIC_URL + "/checkout"}
                   component={Checkout}
                 />
                 <Route
-                  path={process.env.PUBLIC_URL + "/orders"}
+                  exact path={process.env.PUBLIC_URL + "/orders"}
                   component={Orders}
                 />
 
                 <Route
-                  path={process.env.PUBLIC_URL + "/not-found"}
+                  exact path={process.env.PUBLIC_URL + "/not-found"}
                   component={NotFound}
                 />
 

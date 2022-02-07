@@ -31,7 +31,7 @@ const MobileNavMenu = ({ strings }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/home-fashion-four"}>
+                  <Link to={process.env.PUBLIC_URL + "/"}>
                     {strings["home_fashion_four"]}
                   </Link>
                 </li>
