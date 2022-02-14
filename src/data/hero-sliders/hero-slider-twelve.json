@@ -1,22 +1,22 @@
 [
   {
-    "id": 3,
-    "image": "/assets/img/slider/blackshirt1.jpg",
-    "subtitle": "Final Sale",
-    "text": "40% off Summer Vacation",
-    "title": "New Arrival",
-    "url": "/shop-grid-standard"
-  },
-  {
     "id": 1,
     "title": "New Arrival",
     "subtitle": "Final Sale",
-    "text": "30% off Summer Vacation",
-    "image": "/assets/img/slider/whiteshirt.jpg",
+    "text": "40% off Summer Vacation",
+    "image": "/assets/img/slider/DW-slider-1.jpeg",
     "url": "/shop-grid-standard"
   },
   {
     "id": 2,
+    "title": "New Arrival",
+    "subtitle": "Final Sale",
+    "text": "40% off Summer Vacation",
+    "image": "/assets/img/slider/DW-slider-2.jpg",
+    "url": "/shop-grid-standard"
+  },
+  {
+    "id": 3,
     "title": "New Arrival",
     "subtitle": "Final Sale",
     "text": "40% off Summer Vacation",
