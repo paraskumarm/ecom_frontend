@@ -39,7 +39,6 @@ const ProductDescriptionInfoSlider = ({
     selectedProductColor,
     selectedProductSize
   );
-
   return (
     <div className="product-details-content pro-details-slider-content">
       <h2>{product.name}</h2>
@@ -74,7 +73,11 @@ const ProductDescriptionInfoSlider = ({
               {product.variation.map((single, key) => {
                 return (
                   <label
-                    className={`pro-details-color-content--single ${single.color}`}
+                  // style={{
+                  //   color: "white",
+                  //   backgroundColor: "DodgerBlue"
+                  // }}
+                    className={`pro-details-color-content--single ${single.color} `}
                     key={key}
                   >
                     <input

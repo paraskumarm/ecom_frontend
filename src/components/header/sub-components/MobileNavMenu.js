@@ -284,12 +284,12 @@ const MobileNavMenu = ({ strings }) => {
               </ul>
             </li>
             <li className="menu-item-has-children">
-              <Link to={process.env.PUBLIC_URL + "/product/1"}>
+              <Link to={process.env.PUBLIC_URL + "/product-tab-left/1"}>
                 {strings["product_details"]}
               </Link>
               <ul className="sub-menu">
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/product/1"}>
+                  <Link to={process.env.PUBLIC_URL + "/product-tab-left/1"}>
                     {strings["product_tab_bottom"]}
                   </Link>
                 </li>
@@ -319,17 +319,17 @@ const MobileNavMenu = ({ strings }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/product/1"}>
+                  <Link to={process.env.PUBLIC_URL + "/product-tab-left/1"}>
                     {strings["product_simple"]}
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/product/1"}>
+                  <Link to={process.env.PUBLIC_URL + "/product-tab-left/1"}>
                     {strings["product_variation"]}
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/product/1"}>
+                  <Link to={process.env.PUBLIC_URL + "/product-tab-left/1"}>
                     {strings["product_affiliate"]}
                   </Link>
                 </li>
@@ -430,7 +430,7 @@ const MobileNavMenu = ({ strings }) => {
 };
 
 MobileNavMenu.propTypes = {
-  strings: PropTypes.object
+  strings: PropTypes.object,
 };
 
 export default multilanguage(MobileNavMenu);

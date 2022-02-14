@@ -40,7 +40,9 @@ const ProductGridSingleSix = ({
           }`}
         >
           <div className="product-img">
-            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+            <Link
+              to={process.env.PUBLIC_URL + "/product-tab-left/" + product.id}
+            >
               <img
                 className="default-img img-fluid"
                 src={process.env.PUBLIC_URL + product.image[0]}
@@ -62,7 +64,9 @@ const ProductGridSingleSix = ({
           </div>
           <div className="product-content">
             <h3>
-              <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+              <Link
+                to={process.env.PUBLIC_URL + "/product-tab-left/" + product.id}
+              >
                 {product.name}
               </Link>
             </h3>
@@ -113,7 +117,7 @@ const ProductGridSingleSix = ({
                   </a>
                 ) : product.variation && product.variation.length >= 1 ? (
                   <Link
-                    to={`${process.env.PUBLIC_URL}/product/${product.id}`}
+                    to={`${process.env.PUBLIC_URL}/product-tab-left/${product.id}`}
                     title="Select option"
                   >
                     <i className="pe-7s-cart"></i>

@@ -27,6 +27,7 @@ export const fetchCart = () => {
       Axios.get(`${API}usercart/?user=${UserId}`)
         .then((response) => {
           let cart = response.data;
+          
           for (let i = 0; i < cart.length; i++) {
             let image = [];
             let image1 = cart[i].product.image1;
@@ -41,13 +42,14 @@ export const fetchCart = () => {
             if (image5) image.push(image5);
             cart[i].product.image = image;
           }
+          // console.log("cart...",cart[0].product.id);
           let arr = [];
           for (let i = 0; i < cart.length; i++) {
             arr[i] = cart[i].product;
             arr[i].selectedProductColor = cart[i].selectedProductColor;
             arr[i].selectedProductSize = cart[i].selectedProductSize;
             arr[i].quantity = cart[i].quantity;
-            arr[i].id = String(UserId);
+            arr[i].id = cart[i].product.id;
             arr[i].cartItemId = String(cart[i].id);
           }
           console.log(arr);

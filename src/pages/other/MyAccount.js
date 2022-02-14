@@ -39,8 +39,7 @@ const MyAccount = ({ location }) => {
   const getUserData = () => {
     getUserDatahelper(userId)
       .then((response) => {
-        if(response.phone==null)
-        response.phone="";
+        if (response.phone == null) response.phone = "";
 
         setValues({
           name: response.name,
@@ -100,18 +99,14 @@ const MyAccount = ({ location }) => {
             </div>
           </div>
           <div className="row">
-            <div className="col-2">
-              <div className="billing-back-btn">
-                <div className="billing-btn">
+            <div className="col-lg-12">
+              <div className="cart-shiping-update-wrapper">
+                <div className="cart-clear">
                   <button type="submit" onClick={onEdit}>
                     Edit
                   </button>
                 </div>
-              </div>
-            </div>
-            <div className="col-10">
-              <div className="billing-back-btn">
-                <div className="billing-btn">
+                <div className="cart-clear">
                   <button type="submit" onClick={saveUserData}>
                     Save
                   </button>
@@ -119,12 +114,6 @@ const MyAccount = ({ location }) => {
               </div>
             </div>
           </div>
-
-
-
-
-
-
         </div>
       );
     } else {
@@ -155,7 +144,7 @@ const MyAccount = ({ location }) => {
               </div>
             </div>
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-2">
               <div className="billing-back-btn">
                 <div className="billing-btn">
@@ -168,6 +157,22 @@ const MyAccount = ({ location }) => {
             <div className="col-10">
               <div className="billing-back-btn">
                 <div className="billing-btn">
+                  <button type="submit" onClick={saveUserData}>
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div> */}
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="cart-shiping-update-wrapper">
+                <div className="cart-clear">
+                  <button type="submit" onClick={onEdit}>
+                    Edit
+                  </button>
+                </div>
+                <div className="cart-clear">
                   <button type="submit" onClick={saveUserData}>
                     Save
                   </button>

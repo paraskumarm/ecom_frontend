@@ -6,7 +6,6 @@ import NewsletterTwo from "../../wrappers/newsletter/NewsletterTwo";
 import ProductGridFiveContainer from "../../wrappers/product/ProductGridFiveContainer";
 
 const HomeFashionFour = () => {
-  
   return (
     <Fragment>
       <MetaTags>
@@ -25,8 +24,9 @@ const HomeFashionFour = () => {
           spaceBottomClass="pb-100"
           category="accessories"
         />
+
         {/* newsletter */}
-        <NewsletterTwo spaceBottomClass="pb-100" />
+        {/* <NewsletterTwo spaceBottomClass="pb-100" /> */}
       </LayoutFive>
     </Fragment>
   );

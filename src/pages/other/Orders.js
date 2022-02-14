@@ -134,7 +134,8 @@ const Orders = ({
     },
   ]);
   const loadOrderHistory = () => {
-    getOrderHistory()
+    
+    isAuthenticated()&& getOrderHistory()
       .then((data) => {
         if (data.error) {
           console.log(data.error);
@@ -233,7 +234,8 @@ const Orders = ({
                                   <td className="product-thumbnail">
                                     <Link
                                       to={
-                                        process.env.PUBLIC_URL + "/product/" //+
+                                        process.env.PUBLIC_URL +
+                                        "/product-tab-left/" //+
                                         // cartItem.id
                                       }
                                     >
@@ -251,7 +253,8 @@ const Orders = ({
                                   <td className="product-name">
                                     <Link
                                       to={
-                                        process.env.PUBLIC_URL + "/product/" //+
+                                        process.env.PUBLIC_URL +
+                                        "/product-tab-left/" //+
                                         // cartItem.id
                                       }
                                     >

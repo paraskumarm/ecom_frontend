@@ -250,8 +250,7 @@
 
     overflow: hidden;
     img {
-      width: 20em;
-      height: 23em;
+      width: 100%;
     }
 
     &-badges {
@@ -271,7 +270,7 @@
         color: #fff;
         border-radius: 3px;
         &.pink {
-          background-color: #ed2e2e;
+          background-color: #fa6bff;
         }
         &.purple {
           background-color: $theme-color;
@@ -1371,7 +1370,7 @@
       transition: all 0s ease 0s;
 
       border: none;
-      background: #ed2e2e none repeat scroll 0 0;
+      background: #fa6bff none repeat scroll 0 0;
     }
     .ui-slider-handle {
       width: 15px;
@@ -1379,7 +1378,7 @@
       margin-left: 0;
 
       border: medium none;
-      border: 4px solid #ed2e2e;
+      border: 4px solid #fa6bff;
       border-radius: 50%;
       background: #fff none repeat scroll 0 0;
     }
@@ -1421,7 +1420,7 @@
       top: 20px;
       right: 20px;
       &.pink {
-        color: #ed2e2e;
+        color: #fa6bff;
       }
       &.red {
         color: #ff3d2a;
@@ -1479,7 +1478,7 @@
         background-color: $theme-color;
         &:hover,
         &.active {
-          background-color: #ed2e2e;
+          background-color: #fa6bff;
         }
       }
       &.product-action-2-red {
@@ -1510,7 +1509,7 @@
 
         border-radius: 3px;
         &.pink {
-          color: #ed2e2e;
+          color: #fa6bff;
         }
         &.purple {
           color: $theme-color;
@@ -1553,7 +1552,7 @@
           &.old {
             text-decoration: line-through;
 
-            color: #ed2e2e;
+            color: #fa6bff;
             &.red {
               color: #ff3d2a;
             }
@@ -1591,7 +1590,7 @@
             &.old {
               text-decoration: line-through;
 
-              color: #ed2e2e;
+              color: #fa6bff;
             }
           }
         }
@@ -1837,8 +1836,7 @@
     position: relative;
     a {
       img {
-        width: 20em;
-        height: 23em;
+        width: 100%;
       }
     }
     &-badges {
@@ -1862,7 +1860,7 @@
           background-color: $theme-color;
         }
         &.pink {
-          background-color: #ed2e2e;
+          background-color: #fa6bff;
         }
         &:last-child {
           margin-bottom: 0;
@@ -1876,7 +1874,7 @@
     top: 5%;
     right: 5%;
     bottom: 5%;
-    left: -10%;
+    left: 5%;
 
     visibility: hidden;
 
@@ -1964,7 +1962,7 @@
           background-color: #a749ff;
           &:hover,
           &.active {
-            background-color: #ed2e2e;
+            background-color: #fa6bff;
           }
           &:disabled {
             cursor: not-allowed;
@@ -2158,7 +2156,7 @@
         &.old {
           text-decoration: line-through;
 
-          color: #ed2e2e;
+          color: #fa6bff;
         }
       }
       &.price-4-center {
@@ -2302,7 +2300,7 @@
         background-color: $theme-color;
       }
       &.pink {
-        background-color: #ed2e2e;
+        background-color: #fa6bff;
       }
       &:last-child {
         margin-bottom: 0;
@@ -2350,7 +2348,7 @@
         &:hover,
         &.active {
           color: #fff;
-          background-color: #ed2e2e;
+          background-color: #fa6bff;
         }
       }
     }
@@ -2396,7 +2394,7 @@
         &.old {
           text-decoration: line-through;
 
-          color: #ed2e2e;
+          color: #fa6bff;
         }
       }
     }

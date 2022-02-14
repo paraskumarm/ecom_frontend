@@ -4,7 +4,7 @@ import {
   getIndividualCategories,
   getIndividualTags,
   getIndividualColors,
-  getProductsIndividualSizes
+  getProductsIndividualSizes,
 } from "../../helpers/product";
 import ShopSearch from "../../components/product/ShopSearch";
 import ShopCategories from "../../components/product/ShopCategories";
@@ -44,7 +44,7 @@ const ShopSidebar = ({ products, getSortParams, sideSpaceClass }) => {
 ShopSidebar.propTypes = {
   getSortParams: PropTypes.func,
   products: PropTypes.array,
-  sideSpaceClass: PropTypes.string
+  sideSpaceClass: PropTypes.string,
 };
 
 export default ShopSidebar;

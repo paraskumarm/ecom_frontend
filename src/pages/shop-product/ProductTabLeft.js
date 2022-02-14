@@ -38,7 +38,7 @@ const ProductTabLeft = ({ location, product }) => {
           product={product}
           galleryType="leftThumb"
         />
-    {console.log("paras,",product)}
+        {console.log("paras,", product)}
         {/* product description tab */}
         <ProductDescriptionTab
           spaceBottomClass="pb-90"
@@ -57,18 +57,18 @@ const ProductTabLeft = ({ location, product }) => {
 
 ProductTabLeft.propTypes = {
   location: PropTypes.object,
-  product: PropTypes.object
+  product: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => {
   const itemId = ownProps.match.params.id;
-  console.log("bool",typeof(state.productData.products[0].id),typeof(itemId));
+  console.log("bool", typeof state.productData.products[0].id, typeof itemId);
 
   return {
     // product: state.productData.products[0]
     product: state.productData.products.filter(
-      single => single.id ===itemId
-    )[0]
+      (single) => single.id === itemId
+    )[0],
   };
 };
 
