@@ -57,15 +57,15 @@ const ProductTabRight = ({ location, product }) => {
 
 ProductTabRight.propTypes = {
   location: PropTypes.object,
-  product: PropTypes.object
+  product: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => {
   const itemId = ownProps.match.params.id;
   return {
     product: state.productData.products.filter(
-      single => single.id === itemId
-    )[0]
+      (single) => single.id === itemId
+    )[0],
   };
 };
 

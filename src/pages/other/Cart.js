@@ -97,7 +97,7 @@ const Cart = ({
                                   <Link
                                     to={
                                       process.env.PUBLIC_URL +
-                                      "/product/" +
+                                      "/product-tab-left/" +
                                       cartItem.id
                                     }
                                   >
@@ -116,7 +116,7 @@ const Cart = ({
                                   <Link
                                     to={
                                       process.env.PUBLIC_URL +
-                                      "/product/" +
+                                      "/product-tab-left/" +
                                       cartItem.id
                                     }
                                   >

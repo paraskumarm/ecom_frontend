@@ -24,7 +24,7 @@ const ShopGridNoSidebar = ({ location, products }) => {
   const pageLimit = 15;
   const { pathname } = location;
 
-  const getLayout = layout => {
+  const getLayout = (layout) => {
     setLayout(layout);
   };
 
@@ -104,12 +104,12 @@ const ShopGridNoSidebar = ({ location, products }) => {
 
 ShopGridNoSidebar.propTypes = {
   location: PropTypes.object,
-  products: PropTypes.array
+  products: PropTypes.array,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    products: state.productData.products
+    products: state.productData.products,
   };
 };
 
