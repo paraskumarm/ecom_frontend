@@ -25,7 +25,6 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                 <i className="fa" />
               )}
             </Link>
-            
           </li>
           <li>
             <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
@@ -39,7 +38,6 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                 <i className="fa" />
               )}
             </Link>
-            
           </li>
           <li>
             <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
@@ -93,6 +91,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                   {strings["login_register"]}
                 </Link>
               </li>
+
               <li>
                 <Link to={process.env.PUBLIC_URL + "/about"}>
                   {strings["about_us"]}
@@ -100,48 +99,15 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
               </li>
               <li>
                 <Link to={process.env.PUBLIC_URL + "/contact"}>
-                  {strings["contact_us"]}
+                  Book An Appointment
                 </Link>
               </li>
             </ul>
           </li>
-          <li>
-            <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
-              {strings["blog"]}
-              {sidebarMenu ? (
-                <span>
-                  <i className="fa fa-angle-right"></i>
-                </span>
-              ) : (
-                <i className="fa fa-angle-down" />
-              )}
-            </Link>
-            <ul className="submenu">
-              <li>
-                <Link to={process.env.PUBLIC_URL + "/blog-standard"}>
-                  {strings["blog_standard"]}
-                </Link>
-              </li>
-              <li>
-                <Link to={process.env.PUBLIC_URL + "/blog-no-sidebar"}>
-                  {strings["blog_no_sidebar"]}
-                </Link>
-              </li>
-              <li>
-                <Link to={process.env.PUBLIC_URL + "/blog-right-sidebar"}>
-                  {strings["blog_right_sidebar"]}
-                </Link>
-              </li>
-              <li>
-                <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-                  {strings["blog_details_standard"]}
-                </Link>
-              </li>
-            </ul>
-          </li>
+         
           <li>
             <Link to={process.env.PUBLIC_URL + "/contact"}>
-              {strings["contact_us"]}
+              Book An Appointment
             </Link>
           </li>
         </ul>
@@ -153,7 +119,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
 NavMenu.propTypes = {
   menuWhiteClass: PropTypes.string,
   sidebarMenu: PropTypes.bool,
-  strings: PropTypes.object
+  strings: PropTypes.object,
 };
 
 export default multilanguage(NavMenu);

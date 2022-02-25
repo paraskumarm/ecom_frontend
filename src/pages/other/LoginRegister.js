@@ -54,11 +54,13 @@ const LoginRegister = ({ location }) => {
           console.log("bubububub");
           setErrorRegister(true);
           setText(false);
+          
         }else{
           setSuccessRegister(true);
         }
       })
       .catch((e) => console.log(e));
+
   };
   const [reload, setReload] = useState(false);
   const [errorLogin, setErrorLogin] = useState(false);
@@ -111,11 +113,13 @@ const LoginRegister = ({ location }) => {
             console.log("token added");
           });
           setReload(!reload);
+          window.location.reload();
         } else {
           setErrorLogin(true);
         }
 
         console.log("DATA:", data);
+        
       })
       .catch((e) => console.log(e));
   };

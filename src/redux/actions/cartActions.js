@@ -4,6 +4,8 @@ import uuid from "uuid/v4";
 import { addToUserCart } from "../../helpers/addToUserCart";
 import { isAuthenticated } from "../../helpers/auth";
 import { deleteFromUserCart } from "../../helpers/deleteFromUserCart";
+import { deleteAllFromUserCart } from "../../helpers/deleteAllFromUserCart";
+import { decreaseFromUserCart } from "../../helpers/decreaseFromUserCart";
 // import { getCartUrl } from "../../helpers/getCartUrl";
 
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -27,7 +29,7 @@ export const fetchCart = () => {
       Axios.get(`${API}usercart/?user=${UserId}`)
         .then((response) => {
           let cart = response.data;
-          
+
           for (let i = 0; i < cart.length; i++) {
             let image = [];
             let image1 = cart[i].product.image1;
@@ -51,7 +53,34 @@ export const fetchCart = () => {
             arr[i].quantity = cart[i].quantity;
             arr[i].id = cart[i].product.id;
             arr[i].cartItemId = String(cart[i].id);
+            let size = [];
+            if (cart[i].variation[0].stockS) {
+              let obj1 = {};
+              obj1.name = "S";
+              obj1.stock = cart[i].variation[0].stockS;
+              size.push(obj1);
+            }
+            if (cart[i].variation[0].stockM) {
+              let obj1 = {};
+              obj1.name = "M";
+              obj1.stock = cart[i].variation[0].stockM;
+              size.push(obj1);
+            }
+            if (cart[i].variation[0].stockL) {
+              let obj1 = {};
+              obj1.name = "L";
+              obj1.stock = cart[i].variation[0].stockL;
+              size.push(obj1);
+            }
+            if (cart[i].variation[0].stockXL) {
+              let obj1 = {};
+              obj1.name = "XL";
+              obj1.stock = cart[i].variation[0].stockXL;
+              size.push(obj1);
+            }
+            arr[i].product.variation[0].size=size;
           }
+
           console.log(arr);
           dispatch(fetchCartSuccess(arr));
         })
@@ -66,6 +95,7 @@ export const fetchCart = () => {
 };
 
 //add to cart
+
 export const addToCart = (
   item,
   addToast,
@@ -73,56 +103,81 @@ export const addToCart = (
   selectedProductColor,
   selectedProductSize
 ) => {
-  // console.log("YII");
-  console.log("ITEM", item);
-  // let cartid =uuid();
-  // let usercartid=0;
-  if (UserId) {
-    addToUserCart(
-      UserId,
-      token,
-      item.id,
-      quantityCount,
-      selectedProductColor,
-      selectedProductSize
-    )
-      .then((response) => {
-        // console.log(response);
-        cartid = response.id;
-        localStorage.setItem("cartid", cartid);
-      })
-      .catch((e) => console.log(e));
-  }
-  let cartid=uuid();
-  console.log("cart adding..", cartid);
+  console.log("ITEM=", item);
+  console.log("selectedProductColor=", selectedProductColor);
+  console.log("selectedProductSize=", selectedProductSize);
+  let cartid = uuid();
+  let usercartid = 0;
 
+  // while (usercartid == 0) {
+  //   console.log("time++");
+  // }
   return (dispatch) => {
+    //redux thunk
     if (addToast) {
       addToast("Added To Cart", { appearance: "success", autoDismiss: true });
     }
-    //make only post request to cart api no need to modify redux store
-    dispatch({
-      type: ADD_TO_CART,
-      payload: {
-        ...item,
-        quantity: quantityCount,
-        selectedProductColor: selectedProductColor
-          ? selectedProductColor
-          : item.selectedProductColor
-          ? item.selectedProductColor
-          : null,
-        selectedProductSize: selectedProductSize
-          ? selectedProductSize
-          : item.selectedProductSize
-          ? item.selectedProductSize
-          : null,
-      },
-      cartItemid: cartid,
-    });
+    if (UserId) {
+      addToUserCart(
+        UserId,
+        token,
+        item.id,
+        quantityCount,
+        selectedProductColor,
+        selectedProductSize
+      )
+        .then((response) => {
+          usercartid = response.id;
+          dispatch({
+            type: ADD_TO_CART,
+            payload: {
+              ...item,
+              quantity: quantityCount,
+              selectedProductColor: selectedProductColor
+                ? selectedProductColor
+                : item.selectedProductColor
+                ? item.selectedProductColor
+                : null,
+              selectedProductSize: selectedProductSize
+                ? selectedProductSize
+                : item.selectedProductSize
+                ? item.selectedProductSize
+                : null,
+            },
+            cartItemid: usercartid,
+          });
+        })
+        .catch((e) => console.log(e));
+    } else {
+      dispatch({
+        type: ADD_TO_CART,
+        payload: {
+          ...item,
+          quantity: quantityCount,
+          selectedProductColor: selectedProductColor
+            ? selectedProductColor
+            : item.selectedProductColor
+            ? item.selectedProductColor
+            : null,
+          selectedProductSize: selectedProductSize
+            ? selectedProductSize
+            : item.selectedProductSize
+            ? item.selectedProductSize
+            : null,
+        },
+        cartItemid: cartid,
+      });
+    }
   };
 };
 //decrease from cart
 export const decreaseQuantity = (item, addToast) => {
+  if (UserId) {
+    decreaseFromUserCart(UserId, item.cartItemId)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  }
+
   return (dispatch) => {
     if (addToast) {
       addToast("Item Decremented From Cart", {
@@ -151,6 +206,11 @@ export const deleteFromCart = (item, addToast) => {
 };
 //delete all from cart
 export const deleteAllFromCart = (addToast) => {
+  if (UserId) {
+    deleteAllFromUserCart(UserId)
+      .then((response) => console.log(response))
+      .catch((e) => console.log(e));
+  }
   return (dispatch) => {
     if (addToast) {
       addToast("Removed All From Cart", {

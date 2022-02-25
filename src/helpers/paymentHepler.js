@@ -1,5 +1,7 @@
 import { API } from "../backend";
 import axios from "axios";
+import { deleteAllFromUserCart } from "./deleteAllFromUserCart";
+import { isAuthenticated } from "./auth";
 const handleSuccess = (res) => {
   // separate key and values from the res object which is nothing but param_dict
   let keyArr = Object.keys(res);
@@ -39,15 +41,15 @@ const handleSuccess = (res) => {
   document.body.appendChild(frm);
   // finally submit that form
   frm.submit();
-
+  deleteAllFromUserCart(isAuthenticated().user.id)
+    .then((res) => console.logf(res))
+    .catch((e) => console.log(e));
   // if you remember, the param_dict also has "'CALLBACK_URL': 'http://127.0.0.1:8000/api/handlepayment/'"
   // so as soon as Paytm gets the payment it will hit that callback URL with some response and
   // on the basis of that response we are displaying the "payment successful" or "failed" message
 };
 
 export const processPayment = async (userId, token, addressId, orderData) => {
-  
-
   // send data to the backend
 
   await axios({
@@ -60,8 +62,8 @@ export const processPayment = async (userId, token, addressId, orderData) => {
     data: orderData,
   }).then((res) => {
     // we will retrieve the param_dict that we are sending from the backend with
-    // all the necessary credentials, and we will pass it to the handleSuccess() func 
-   //  for the further process
+    // all the necessary credentials, and we will pass it to the handleSuccess() func
+    //  for the further process
     if (res) {
       console.log(res);
       handleSuccess(res.data.param_dict);
