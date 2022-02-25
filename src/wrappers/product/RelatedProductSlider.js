@@ -6,8 +6,8 @@ import ProductGrid from "./ProductGrid";
 
 const RelatedProductSlider = ({ spaceBottomClass, category }) => {
   const settings = {
-    loop: false,
-    slidesPerView: 3,
+    loop: true,
+    slidesPerView: 4,
     grabCursor: true,
     breakpoints: {
       1024: {

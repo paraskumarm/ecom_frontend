@@ -1,4 +1,5 @@
 import { API } from "../backend";
+import { DELETE_ALL_FROM_CART } from "../redux/actions/cartActions";
 
 export const signup = (user) => {
   user.name = user.username;
@@ -33,6 +34,7 @@ export const signin = (user) => {
     .then((response) => {
       // console.log("LOGIN RESPONSE: ", response);
       localStorage.removeItem("redux_localstorage_simple");
+      
       return response.json();
     })
     .catch((err) => console.log(err));
@@ -66,7 +68,15 @@ export const signout = (next) => {
     return fetch(`${API}user/logout/${UserId}`, { method: "GET" })
       .then((response) => {
         console.log("Signout success", response);
+        window.location.reload();
         next();
+        // return (dispatch) => {
+          
+        //   // make delete request on cart api
+        //   dispatch({ type: DELETE_ALL_FROM_CART });
+         
+        // };
+        
       })
       .catch((err) => console.log(err));
   }

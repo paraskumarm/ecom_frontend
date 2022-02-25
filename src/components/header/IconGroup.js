@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import MenuCart from "./sub-components/MenuCart";
 import { deleteFromCart } from "../../redux/actions/cartActions";
 import { isAuthenticated, signout } from "../../helpers/auth";
+import { useEffect } from "react";
 
 const IconGroup = ({
   history,
@@ -18,6 +19,7 @@ const IconGroup = ({
   const handleClick = (e) => {
     e.currentTarget.nextSibling.classList.toggle("active");
   };
+
 
   const triggerMobileMenu = () => {
     const offcanvasMobileMenu = document.querySelector(

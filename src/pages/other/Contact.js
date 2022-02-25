@@ -1,14 +1,72 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import LocationMap from "../../components/contact/LocationMap";
+import { sendMail } from "../../helpers/sendMail";
 
 const Contact = ({ location }) => {
   const { pathname } = location;
+  const [sent, setsent] = useState(false);
+  const send = (e) => {
+    e.preventDefault();
+    if(!name||!email||!subject||!msg){
+      seterror(true);
+      return;
+    }
+    sendMail(values)
+      .then((res) => {
+        console.log(res);
+        setsent(true);
+      })
+      .catch((e) => console.log(e));
+  };
+  // const [subject, setsubject] = useState('');
+  // const [name, setname] = useState('');
+  // const [email, setemail] = useState('');
+  // const [msg, setmsg] = useState('');
+  const successMessage = () => {
+    return (
+      <div className="row">
+        <div className="col-md text-left">
+          <div
+            className="alert alert-success"
+            style={{ display: sent ? "" : "none" }}
+          >
+            Message Sent
+          </div>
+        </div>
+      </div>
+    );
+  };
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    msg: "",
+    subject: "",
+  });
+  const [error, seterror] = useState(false);
+  let { name, email, msg, subject } = values;
+  const handleChange = (key) => (event) => {
+    setValues({ ...values, [key]: event.target.value });
+  };
 
+  const errorMessage = () => {
+    return (
+      <div className="row">
+        <div className="col-md text-left">
+          <div
+            className="alert alert-danger"
+            style={{ display: error ? "" : "none" }}
+          >
+            All Fields are mandatory
+          </div>
+        </div>
+      </div>
+    );
+  };
   return (
     <Fragment>
       <MetaTags>
@@ -28,10 +86,69 @@ const Contact = ({ location }) => {
         {/* 28.647945382571258, 77.33842335845067 */}
         <div className="contact-area pt-100 pb-100">
           <div className="container">
-            <div className="contact-map mb-10">
-              <LocationMap latitude="28.647945382571258" longitude="77.33842335845067" />
-            </div>
             <div className="custom-row-2">
+              
+              <div className="col-lg-8 col-md-7">
+                <div className="contact-form">
+                  <div className="contact-title mb-30">
+                    <h2>Get In Touch</h2>
+                  </div>
+                  <form className="contact-form-style">
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <input
+                          name="name"
+                          placeholder="Name*"
+                          type="text"
+                          value={name}
+                          onChange={handleChange("name")}
+                        />
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          placeholder="Email*"
+                          type="email"
+                          value={email}
+                          onChange={handleChange("email")}
+                        />
+                      </div>
+                      <div className="col-lg-12">
+                        <input
+                          name="subject"
+                          placeholder="Subject*"
+                          type="text"
+                          value={subject}
+                          onChange={handleChange("subject")}
+                        />
+                      </div>
+                      <div className="col-lg-12">
+                        <textarea
+                          name="message"
+                          placeholder="Your Message*"
+                          value={msg}
+                          onChange={handleChange("msg")}
+                        />
+                        {successMessage()}
+                        {errorMessage()}
+                        {!sent ? (
+                          <button
+                            onClick={send}
+                            className="submit"
+                            type="submit"
+                          >
+                            SEND
+                          </button>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
+                  </form>
+                  <p className="form-messege" />
+                </div>
+              </div>
+
+
               <div className="col-lg-4 col-md-5">
                 <div className="contact-info-wrap">
                   <div className="single-contact-info">
@@ -97,41 +214,12 @@ const Contact = ({ location }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-8 col-md-7">
-                <div className="contact-form">
-                  <div className="contact-title mb-30">
-                    <h2>Get In Touch</h2>
-                  </div>
-                  <form className="contact-form-style">
-                    <div className="row">
-                      <div className="col-lg-6">
-                        <input name="name" placeholder="Name*" type="text" />
-                      </div>
-                      <div className="col-lg-6">
-                        <input name="email" placeholder="Email*" type="email" />
-                      </div>
-                      <div className="col-lg-12">
-                        <input
-                          name="subject"
-                          placeholder="Subject*"
-                          type="text"
-                        />
-                      </div>
-                      <div className="col-lg-12">
-                        <textarea
-                          name="message"
-                          placeholder="Your Message*"
-                          defaultValue={""}
-                        />
-                        <button className="submit" type="submit">
-                          SEND
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                  <p className="form-messege" />
-                </div>
-              </div>
+            </div>
+            <div className="contact-map mb-10">
+              <LocationMap
+                latitude="28.658019914748266"
+                longitude="77.29002574193976"
+              />
             </div>
           </div>
         </div>
@@ -141,7 +229,7 @@ const Contact = ({ location }) => {
 };
 
 Contact.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 export default Contact;
