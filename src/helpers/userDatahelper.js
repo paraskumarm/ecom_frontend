@@ -1,4 +1,3 @@
-
 // export const userDatahelper = (userId,userData) => {
 //   const formData = new FormData();
 //   for (const name in userData) {
@@ -18,8 +17,7 @@
 import { API } from "../backend";
 
 // };
-export const userDatahelper = (userId,userData) => {
-  
+export const userDatahelper = (userId, userData) => {
   return fetch(`${API}user/${userId}/`, {
     method: "PATCH",
     headers: {
@@ -28,13 +26,12 @@ export const userDatahelper = (userId,userData) => {
     },
     body: JSON.stringify(userData),
   })
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 };
 
 export const getUserDatahelper = (userId) => {
-  
   return fetch(`${API}user/${userId}/`, {
     method: "GET",
     headers: {
@@ -42,9 +39,6 @@ export const getUserDatahelper = (userId) => {
       "Content-Type": "application/json",
     },
   })
-  .then(response => response.json())
-  .catch(error => console.log('error', error));
+    .then((response) => response.json())
+    .catch((error) => console.log("error", error));
 };
-
-
-

@@ -180,7 +180,9 @@ const Cart = ({
                                         addToCart(
                                           cartItem,
                                           addToast,
-                                          quantityCount
+                                          quantityCount,
+                                          cartItem.selectedProductColor,
+                                          cartItem.selectedProductSize
                                         )
                                       }
                                       disabled={
@@ -312,7 +314,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (item, addToast, quantityCount) => {
-      dispatch(addToCart(item, addToast, quantityCount));
+      dispatch(addToCart(item, addToast, quantityCount,item.selectedProductColor,item.selectedProductSize));
     },
     decreaseQuantity: (item, addToast) => {
       dispatch(decreaseQuantity(item, addToast));

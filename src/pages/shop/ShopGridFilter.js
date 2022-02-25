@@ -32,6 +32,22 @@ const ShopGridFilter = ({ location, products }) => {
     setSortType(sortType);
     setSortValue(sortValue);
   };
+  // const getSortParamsColor = (sortType, sortValue) => {
+  //   setSortType(sortType);
+  //   setSortValue(sortValue);
+  // };
+  // const getSortParamsSize = (sortType, sortValue) => {
+  //   setSortType(sortType);
+  //   setSortValue(sortValue);
+  // };
+  // const getSortParamsTag = (sortType, sortValue) => {
+  //   setSortType(sortType);
+  //   setSortValue(sortValue);
+  // };
+  // const getSortParamsCategory = (sortType, sortValue) => {
+  //   setSortType(sortType);
+  //   setSortValue(sortValue);
+  // };
 
   const getFilterSortParams = (sortType, sortValue) => {
     setFilterSortType(sortType);

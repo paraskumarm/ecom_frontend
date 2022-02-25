@@ -29,6 +29,46 @@ export const fetchProducts = () => {
           if (image5) image.push(image5);
           product[i].image = image;
           product[i].id = String(product[i].id);
+          let size = [];
+          if (product[i].variation[0].stockS) {
+            let obj1 = {};
+            obj1.name = "S";
+            obj1.stock = product[i].variation[0].stockS;
+            size.push(obj1);
+          }
+          if (product[i].variation[0].stockM) {
+            let obj2 = {};
+            obj2.name = "M";
+            obj2.stock = product[i].variation[0].stockM;
+            size.push(obj2);
+          }
+          if (product[i].variation[0].stockL) {
+            let obj3 = {};
+            obj3.name = "L";
+            obj3.stock = product[i].variation[0].stockL;
+            size.push(obj3);
+          }
+          if (product[i].variation[0].stockXL) {
+            let obj4 = {};
+            obj4.name = "XL";
+            obj4.stock = product[i].variation[0].stockXL;
+            size.push(obj4);
+          }
+          product[i].variation[0].size = size;
+          // if(product[i].variation.stockS>0){
+          //   product[i].variation.size.S=product[i].variation.stockS;
+          // }
+          // if(product[i].variation.stockM>0){
+
+          //   product[i].variation.size.name="M";
+          //   product[i].variation.size.=product[i].variation.stockM;
+          // }
+          // if(product[i].variation.stockL>0){
+          //   product[i].variation.size.L=product[i].variation.stockL;
+          // }
+          // if(product[i].variation.stockXL>0){
+          //   product[i].variation.size.XL=product[i].variation.stockXL;
+          // }
         }
         console.log(product);
         dispatch(fetchProductsSuccess(product));
