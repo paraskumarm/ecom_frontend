@@ -11,7 +11,6 @@ import {
   addToCart,
   decreaseQuantity,
   deleteFromCart,
-  cartItemStock,
   deleteAllFromCart,
 } from "../../redux/actions/cartActions";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -27,7 +26,6 @@ const Orders = ({
   deleteFromCart,
   deleteAllFromCart,
 }) => {
-  let arr;
   let [orders, setorders] = useState([
     {
       url: "",
@@ -35,6 +33,7 @@ const Orders = ({
       total_products: "",
       total_amount: "",
       quantity_info: [],
+      pkarrqty: [],
       color_info: [],
       size_info: [],
       status_info: [],
@@ -134,42 +133,79 @@ const Orders = ({
     },
   ]);
   const loadOrderHistory = () => {
-    
-    isAuthenticated()&& getOrderHistory()
-      .then((data) => {
-        if (data.error) {
-          console.log(data.error);
-        } else {
-          data.reverse();
-          console.log(data);
-          for (let i = 0; i < data.length; i++) {
-            let quantity_info = data[i].quantity_info;
-            quantity_info = quantity_info.slice(1, quantity_info.length - 1);
-            quantity_info = quantity_info.split(",");
-            let color_info = data[i].color_info;
-            color_info = color_info.slice(1, color_info.length - 1);
-            color_info = color_info.split(",");
-            let size_info = data[i].size_info;
-            size_info = size_info.slice(1, size_info.length - 1);
-            size_info = size_info.split(",");
-            let status_info = data[i].status_info;
-            // status_info = status_info.slice(1, status_info.length - 1);
-            status_info = status_info.split(",");
-            data[i].color_info = color_info;
-            data[i].size_info = size_info;
-            data[i].quantity_info = quantity_info;
-            data[i].status_info = status_info;
+    isAuthenticated() &&
+      getOrderHistory()
+        .then((data) => {
+          if (data.error) {
+          } else {
+            
+            data.reverse();
+            // let pkarrqty=[2];
+
+            for (let i = 0; i < data.length; i++) {
+              
+              let quantity_info = data[i].quantity_info;
+              quantity_info = quantity_info.slice(1, quantity_info.length - 1);
+              quantity_info = quantity_info.split(",");
+              let color_info = data[i].color_info;
+              color_info = color_info.slice(1, color_info.length - 1);
+              color_info = color_info.split(",");
+              let size_info = data[i].size_info;
+              size_info = size_info.slice(1, size_info.length - 1);
+              size_info = size_info.split(",");
+              let status_info = data[i].status_info;
+              // status_info = status_info.slice(1, status_info.length - 1);
+              status_info = status_info.split(",");
+              data[i].color_info = color_info;
+              data[i].size_info = size_info;
+              data[i].quantity_info = quantity_info;
+              data[i].status_info = status_info;
+              let pkarrqty=data[i].pkarrqty;
+              pkarrqty = pkarrqty.slice(1, pkarrqty.length - 1);
+              pkarrqty = pkarrqty.split(",");
+              // console.log(pkarrqty);
+              let neworders=[];
+              // console.log(pkarrqty);
+              console.log(data[i].products);
+              console.log(pkarrqty);
+              for(let j=0;j<pkarrqty.length;j++){
+                // console.log(typeof(parseInt(pkarrqty[i])));
+                let n=parseInt(pkarrqty[j]);
+                console.log(n);
+                for(let k=0;k<n;k++){
+                  neworders.push(data[i].products[j]);
+                  // neworders.reverse();
+                }
+              }
+              // console.log(neworders);
+              data[i].products=neworders;
+            }
+            
+            
+            // console.log(data);
+            setorders(data);
+           
           }
-          setorders(data);
-        }
-      })
-      .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
   };
   const [quantityCount] = useState(1);
   const { addToast } = useToasts();
   const { pathname } = location;
   let cartTotalPrice = 0;
-
+  const getdate = (date) => {
+    let currentdate = date.split("T");
+    let mydate = currentdate[0].split("-");
+    let year = mydate[0];
+    let month = mydate[1];
+    let dat = mydate[2];
+    return dat + "/" + month + "/" + year;
+  };
+  const gettime = (date) => {
+    let currentdate = date.split("T");
+    let time = currentdate[1].substring(0, 8);
+    return time;
+  };
   useEffect(() => {
     loadOrderHistory();
   }, []);
@@ -189,7 +225,7 @@ const Orders = ({
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         <Breadcrumb />
-
+{/* { console.log("orders= ",orders)} */}
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
             {isAuthenticated() && orders && orders.length >= 1 ? (
@@ -212,6 +248,7 @@ const Orders = ({
                         </thead>
                         <tbody>
                           {orders.map((order) => {
+                            // console.log(order);
                             return order.products.map((cartItem, key) => {
                               const discountedPrice = getDiscountPrice(
                                 cartItem.price,
@@ -264,14 +301,18 @@ const Orders = ({
                                     order.size_info[key] ? (
                                       <div className="cart-item-variation">
                                         <span>
-                                          Color: {order.color_info[key]}
-                                          {console.log(order.color_info)}
+                                          Color: {order.color_info[key].toUpperCase()}
+
+                                          {/* Color: {order.color_info[key]} */}
                                         </span>
                                         <span>
                                           Size: {order.size_info[key]}
                                         </span>
                                         <span>
-                                          OrderDate: {order.created_at}
+                                          OrderDate: {getdate(order.created_at)}
+                                        </span>
+                                        <span>
+                                          OrderTime: {gettime(order.created_at)}
                                         </span>
                                       </div>
                                     ) : (
@@ -325,7 +366,6 @@ const Orders = ({
                     </div>
                   </div>
                 </div>
-                {/* {console.log("caritemshistory", cartItems)} */}
 
                 <div className="row">
                   <div className="col-lg-12">

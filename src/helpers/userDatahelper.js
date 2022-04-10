@@ -1,18 +1,4 @@
-// export const userDatahelper = (userId,userData) => {
-//   const formData = new FormData();
-//   for (const name in userData) {
-//     formData.append(name, userData[name]);
-//   }
-//   const API="http://localhost:8000/api/";
-//   return fetch(`${API}user/${userId}/`, {
-//     method: "PATCH",
-//     body: formData,
-//   })
-//     .then((response) => {
-//       // console.log(response)
-//       return response.json();
-//     })
-//     .catch((err) => console.log(err));
+
 
 import { API } from "../backend";
 

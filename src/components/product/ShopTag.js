@@ -9,13 +9,25 @@ const ShopTag = ({ tags, getSortParams }) => {
       <div className="sidebar-widget-tag mt-25">
         {tags ? (
           <ul>
+            <li>
+              <button
+                className="tagbutton"
+                onClick={(e) => {
+                  getSortParams("tag", "");
+                  setActiveSort(e, ".tagbutton");
+                }}
+              >
+                All Tags
+              </button>
+            </li>
             {tags.map((tag, key) => {
               return (
                 <li key={key}>
                   <button
-                    onClick={e => {
+                    className="tagbutton"
+                    onClick={(e) => {
                       getSortParams("tag", tag);
-                      setActiveSort(e);
+                      setActiveSort(e, ".tagbutton");
                     }}
                   >
                     {tag}
@@ -34,7 +46,7 @@ const ShopTag = ({ tags, getSortParams }) => {
 
 ShopTag.propTypes = {
   getSortParams: PropTypes.func,
-  tags: PropTypes.array
+  tags: PropTypes.array,
 };
 
 export default ShopTag;

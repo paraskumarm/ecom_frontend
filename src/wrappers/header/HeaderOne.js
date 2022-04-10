@@ -4,7 +4,6 @@ import Logo from "../../components/header/Logo";
 import NavMenu from "../../components/header/NavMenu";
 import IconGroup from "../../components/header/IconGroup";
 import MobileMenu from "../../components/header/MobileMenu";
-import HeaderTop from "../../components/header/HeaderTop";
 
 const HeaderOne = ({
   layout,
@@ -16,7 +15,7 @@ const HeaderOne = ({
 }) => {
   const [scroll, setScroll] = useState(0);
   const [headerTop, setHeaderTop] = useState(0);
-
+  
   useEffect(() => {
     const header = document.querySelector(".sticky-bar");
     setHeaderTop(header.offsetTop);

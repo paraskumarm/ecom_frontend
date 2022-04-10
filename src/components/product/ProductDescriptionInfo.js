@@ -25,6 +25,7 @@ const ProductDescriptionInfo = ({
   const [selectedProductColor, setSelectedProductColor] = useState(
     product.variation ? product.variation[0].color : ""
   );
+  const [disable, setdisable] = useState(false)
   const [selectedProductSize, setSelectedProductSize] = useState(
     product.variation ? product.variation[0].size[0].name : ""
   );
@@ -39,7 +40,7 @@ const ProductDescriptionInfo = ({
     selectedProductColor,
     selectedProductSize
   );
-
+  
   return (
     <div className="product-details-content ml-70">
       <h2>{product.name}</h2>
@@ -85,13 +86,23 @@ const ProductDescriptionInfo = ({
                     }}
                     key={key}
                   >
+                    {/* {selectedProductColor=single.color} */}
+                    {/* // setSelectedProductColor(single.color) */}
+                    {/* {(single.color !== selectedProductColor)?(
+                    setdisable(true)
+                    ):setdisable(false)
+                    } */}
+                    
                     <input
                       type="radio"
                       value={single.color}
                       name="product-color"
+                      // checked={"checked"}
+                      
                       checked={
-                        single.color === selectedProductColor ? "checked" : ""
+                        single.color === selectedProductColor ? "checked" :""
                       }
+                      
                       onChange={() => {
                         setSelectedProductColor(single.color);
                         setSelectedProductSize(single.size[0].name);
@@ -99,6 +110,8 @@ const ProductDescriptionInfo = ({
                         setQuantityCount(1);
                       }}
                     />
+                    {/* {console.log(single.color)}
+                    {console.log(selectedProductColor)} */}
                     <span className="checkmark"></span>
                   </label>
                 );
@@ -186,8 +199,11 @@ const ProductDescriptionInfo = ({
             </button>
           </div>
           <div className="pro-details-cart btn-hover">
+          {/* {console.log(product.variation[0].color)}
+          {console.log(selectedProductColor)} */}
             {productStock && productStock > 0 ? (
               <button
+              
                 onClick={() =>
                   addToCart(
                     product,
@@ -197,11 +213,12 @@ const ProductDescriptionInfo = ({
                     selectedProductSize
                   )
                 }
-                disabled={productCartQty >= productStock}
+                disabled={product.variation[0].color!==selectedProductColor|| productCartQty >= productStock }
               >
                 {" "}
                 Add To Cart{" "}
               </button>
+             
             ) : (
               <button disabled>Out of Stock</button>
             )}
@@ -302,6 +319,7 @@ const ProductDescriptionInfo = ({
           </li>
         </ul>
       </div>
+      
     </div>
   );
 };

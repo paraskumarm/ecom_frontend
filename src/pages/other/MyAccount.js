@@ -46,7 +46,7 @@ const MyAccount = ({ location }) => {
           email: response.email,
           phone: response.phone,
         });
-        console.log("USERDATA", response);
+        // console.log("USERDATA", response); 
       })
       .catch((e) => console.log(e));
   };

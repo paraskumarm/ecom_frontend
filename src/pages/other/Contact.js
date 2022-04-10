@@ -215,7 +215,7 @@ const Contact = ({ location }) => {
                 </div>
               </div>
             </div>
-            <div className="contact-map mb-10">
+            <div className="contact-map mb-10 mt-25">
               <LocationMap
                 latitude="28.658019914748266"
                 longitude="77.29002574193976"

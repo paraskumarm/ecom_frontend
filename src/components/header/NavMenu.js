@@ -1,9 +1,30 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
-
-const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
+import {
+  getIndividualCategories,
+  getProducts,
+  setActiveSort,
+} from "../../helpers/product";
+import { connect } from "react-redux";
+import { isAuthenticated } from "../../helpers/auth";
+const NavMenu = ({ products, strings, menuWhiteClass, sidebarMenu }) => {
+  const PerformRedirect = () => {
+    return <Redirect to="/shop-grid-standard" />;
+  };
+  const myfun = (key) => {
+    // console.log(e);
+    // setActiveSort(e, ".categorybutton");
+    // <Redirect to="/shop-grid-standard" />
+    PerformRedirect();
+    let fun = () => {
+      let button = document.getElementById("category" + key);
+      button.click();
+    };
+    setTimeout(fun, 200);
+  };
+  const uniqueCategories = getIndividualCategories(products);
   return (
     <div
       className={` ${
@@ -35,9 +56,27 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                   <i className="fa fa-angle-right"></i>
                 </span>
               ) : (
-                <i className="fa" />
+                // <i className="fa " />
+                <i className="fa fa-angle-down" />
               )}
             </Link>
+
+            <ul className="submenu">
+              {uniqueCategories.map((string, key) => {
+                return (
+                  <li key={key}>
+                    <Link
+                      to={process.env.PUBLIC_URL + "/shop-grid-standard"}
+                      onClick={(e) => {
+                        myfun(key);
+                      }}
+                    >
+                      {string.charAt(0).toUpperCase() + string.slice(1)}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </li>
           <li>
             <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
@@ -86,11 +125,14 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                   {strings["my_account"]}
                 </Link>
               </li>
+              {
+                !isAuthenticated()&&
               <li>
                 <Link to={process.env.PUBLIC_URL + "/login-register"}>
                   {strings["login_register"]}
+                  
                 </Link>
-              </li>
+              </li>}
 
               <li>
                 <Link to={process.env.PUBLIC_URL + "/about"}>
@@ -104,7 +146,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
               </li>
             </ul>
           </li>
-         
+
           <li>
             <Link to={process.env.PUBLIC_URL + "/contact"}>
               Book An Appointment
@@ -121,5 +163,14 @@ NavMenu.propTypes = {
   sidebarMenu: PropTypes.bool,
   strings: PropTypes.object,
 };
-
-export default multilanguage(NavMenu);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    products: getProducts(
+      state.productData.products,
+      ownProps.category,
+      ownProps.type,
+      ownProps.limit
+    ),
+  };
+};
+export default connect(mapStateToProps)(multilanguage(NavMenu));

@@ -33,7 +33,6 @@ export const getDiscountPrice = (price, discount) => {
 
 // get product cart quantity
 export const getProductCartQuantity = (cartItems, product, color, size) => {
-  console.log("paras",cartItems);
   let productInCart = cartItems.filter(
     (single) =>
       single.id === product.id &&
@@ -199,10 +198,13 @@ export const getIndividualSizes = (product) => {
   return individualSizes;
 };
 
-export const setActiveSort = (e) => {
+export const setActiveSort = (e, type) => {
+  // console.log("e=",e);
   const filterButtons = document.querySelectorAll(
-    ".sidebar-widget-list-left button, .sidebar-widget-tag button, .product-filter button"
+    // ".sidebar-widget-list-left button, .sidebar-widget-tag button, .product-filter button"
+    type
   );
+
   filterButtons.forEach((item) => {
     item.classList.remove("active");
   });

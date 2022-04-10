@@ -21,7 +21,6 @@ const ProductGridFive = ({
 }) => {
   return (
     <Fragment>
-      {console.log("YO", cartItems)}
       {products.map((product) => {
         return (
           <ProductGridSingleFive

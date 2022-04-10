@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 
 function ProductModal(props) {
   const { product } = props;
-  const { currency } = props;
   const { discountedprice } = props;
   const { finalproductprice } = props;
   const { finaldiscountedprice } = props;
