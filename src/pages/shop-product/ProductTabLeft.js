@@ -38,7 +38,6 @@ const ProductTabLeft = ({ location, product }) => {
           product={product}
           galleryType="leftThumb"
         />
-        {console.log("paras,", product)}
         {/* product description tab */}
         <ProductDescriptionTab
           spaceBottomClass="pb-90"
@@ -62,7 +61,6 @@ ProductTabLeft.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   const itemId = ownProps.match.params.id;
-  console.log("bool", typeof state.productData.products[0].id, typeof itemId);
 
   return {
     // product: state.productData.products[0]

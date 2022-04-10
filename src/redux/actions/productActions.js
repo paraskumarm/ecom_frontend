@@ -14,7 +14,6 @@ export const fetchProducts = () => {
     Axios.get(`${API}product/`)
       .then((response) => {
         const product = response.data;
-        console.log(product);
         for (let i = 0; i < product.length; i++) {
           let image1 = product[i].image1;
           let image2 = product[i].image2;
@@ -54,23 +53,15 @@ export const fetchProducts = () => {
             obj4.stock = product[i].variation[0].stockXL;
             size.push(obj4);
           }
+          if (product[i].variation[0].stockXXL) {
+            let obj5 = {};
+            obj5.name = "XXL";
+            obj5.stock = product[i].variation[0].stockXXL;
+            size.push(obj5);
+          }
           product[i].variation[0].size = size;
-          // if(product[i].variation.stockS>0){
-          //   product[i].variation.size.S=product[i].variation.stockS;
-          // }
-          // if(product[i].variation.stockM>0){
-
-          //   product[i].variation.size.name="M";
-          //   product[i].variation.size.=product[i].variation.stockM;
-          // }
-          // if(product[i].variation.stockL>0){
-          //   product[i].variation.size.L=product[i].variation.stockL;
-          // }
-          // if(product[i].variation.stockXL>0){
-          //   product[i].variation.size.XL=product[i].variation.stockXL;
-          // }
+          
         }
-        console.log(product);
         dispatch(fetchProductsSuccess(product));
       })
       .catch((error) => {

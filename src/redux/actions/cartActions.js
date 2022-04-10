@@ -23,7 +23,6 @@ const fetchCartSuccess = (cart) => ({
 // fetch cart
 export const fetchCart = () => {
   let UserId = isAuthenticated() && isAuthenticated().user.id;
-  console.log("fetching cart...");
   return (dispatch) => {
     if (UserId) {
       Axios.get(`${API}usercart/?user=${UserId}`)
@@ -44,7 +43,6 @@ export const fetchCart = () => {
             if (image5) image.push(image5);
             cart[i].product.image = image;
           }
-          // console.log("cart...",cart[0].product.id);
           let arr = [];
           for (let i = 0; i < cart.length; i++) {
             arr[i] = cart[i].product;
@@ -81,11 +79,10 @@ export const fetchCart = () => {
             arr[i].product.variation[0].size=size;
           }
 
-          console.log(arr);
           dispatch(fetchCartSuccess(arr));
         })
         .catch((error) => {
-          console.log("ERROR", error);
+          console.log("ERROR",error);
         });
     } else {
       // let cart=[]
@@ -103,15 +100,9 @@ export const addToCart = (
   selectedProductColor,
   selectedProductSize
 ) => {
-  console.log("ITEM=", item);
-  console.log("selectedProductColor=", selectedProductColor);
-  console.log("selectedProductSize=", selectedProductSize);
   let cartid = uuid();
   let usercartid = 0;
 
-  // while (usercartid == 0) {
-  //   console.log("time++");
-  // }
   return (dispatch) => {
     //redux thunk
     if (addToast) {
@@ -168,6 +159,7 @@ export const addToCart = (
         cartItemid: cartid,
       });
     }
+    
   };
 };
 //decrease from cart
@@ -191,7 +183,6 @@ export const decreaseQuantity = (item, addToast) => {
 };
 //delete from cart
 export const deleteFromCart = (item, addToast) => {
-  console.log("deleting from cart....", item.cartItemId);
   if (UserId) {
     deleteFromUserCart(item.cartItemId)
       .then((response) => console.log(response))
@@ -225,7 +216,6 @@ export const deleteAllFromCart = (addToast) => {
 
 // get stock of cart item
 export const cartItemStock = (item, color, size) => {
-  console.log("stock", color);
   if (item.stock) {
     return item.stock;
   } else {

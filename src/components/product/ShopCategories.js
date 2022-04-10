@@ -12,9 +12,11 @@ const ShopCategories = ({ categories, getSortParams }) => {
             <li>
               <div className="sidebar-widget-list-left">
                 <button
-                  onClick={e => {
+                  className="categorybutton"
+                  onClick={(e) => {
                     getSortParams("category", "");
-                    setActiveSort(e);
+
+                    setActiveSort(e, ".categorybutton");
                   }}
                 >
                   <span className="checkmark" /> All Categories
@@ -23,12 +25,14 @@ const ShopCategories = ({ categories, getSortParams }) => {
             </li>
             {categories.map((category, key) => {
               return (
-                <li key={key}>
+                <li key={key} >
                   <div className="sidebar-widget-list-left">
                     <button
-                      onClick={e => {
+                      className="categorybutton"
+                      id={"category"+key}
+                      onClick={(e) => {
                         getSortParams("category", category);
-                        setActiveSort(e);
+                        setActiveSort(e, ".categorybutton");
                       }}
                     >
                       {" "}
@@ -49,7 +53,7 @@ const ShopCategories = ({ categories, getSortParams }) => {
 
 ShopCategories.propTypes = {
   categories: PropTypes.array,
-  getSortParams: PropTypes.func
+  getSortParams: PropTypes.func,
 };
 
 export default ShopCategories;

@@ -12,9 +12,10 @@ const ShopColor = ({ colors, getSortParams }) => {
             <li>
               <div className="sidebar-widget-list-left">
                 <button
-                  onClick={e => {
+                  className="colorbutton"
+                  onClick={(e) => {
                     getSortParams("color", "");
-                    setActiveSort(e);
+                    setActiveSort(e, ".colorbutton");
                   }}
                 >
                   <span className="checkmark" /> All Colors{" "}
@@ -26,9 +27,10 @@ const ShopColor = ({ colors, getSortParams }) => {
                 <li key={key}>
                   <div className="sidebar-widget-list-left">
                     <button
-                      onClick={e => {
+                      className="colorbutton"
+                      onClick={(e) => {
                         getSortParams("color", color);
-                        setActiveSort(e);
+                        setActiveSort(e, ".colorbutton");
                       }}
                     >
                       <span className="checkmark" /> {color}{" "}
@@ -48,7 +50,7 @@ const ShopColor = ({ colors, getSortParams }) => {
 
 ShopColor.propTypes = {
   colors: PropTypes.array,
-  getSortParams: PropTypes.func
+  getSortParams: PropTypes.func,
 };
 
 export default ShopColor;

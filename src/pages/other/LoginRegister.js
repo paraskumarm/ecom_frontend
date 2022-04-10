@@ -14,6 +14,7 @@ import {
   signup,
   isAuthenticated,
 } from "../../helpers/auth";
+import Googlebutton from "../../components/googlelogin/Googlebutton";
 
 const LoginRegister = ({ location }) => {
   const { pathname } = location;
@@ -25,7 +26,6 @@ const LoginRegister = ({ location }) => {
 
   const PerformRedirect = () => {
     if (isAuthenticated()) {
-      console.log("please redirect");
       return <Redirect to="/" />;
     }
   };
@@ -39,9 +39,9 @@ const LoginRegister = ({ location }) => {
     event.preventDefault();
     if (!username || !email) {
       setErrorRegister(true);
+      setErrorMsg("Fields cannot be blank");
       return;
     }
-    console.log(username);
     if (password.length < 5) {
       setErrorRegister(true);
       setText(true);
@@ -51,26 +51,23 @@ const LoginRegister = ({ location }) => {
       .then((data) => {
         console.log("DATA", data);
         if (data.email != email) {
-          console.log("bubububub");
           setErrorRegister(true);
           setText(false);
-          
-        }else{
+          setErrorMsg(data.email);
+        } else {
           setSuccessRegister(true);
+          document.getElementById("loginbuuton").click();
         }
       })
       .catch((e) => console.log(e));
-
   };
   const [reload, setReload] = useState(false);
   const [errorLogin, setErrorLogin] = useState(false);
   const [successRegister, setSuccessRegister] = useState(false);
   const [errorRegister, setErrorRegister] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   useEffect(() => {}, [reload]);
   const errorMessageLogin = () => {
-    {
-      console.log("hi");
-    }
     return (
       <div className="row">
         <div className="col-md text-left">
@@ -78,16 +75,13 @@ const LoginRegister = ({ location }) => {
             className="alert alert-danger"
             style={{ display: errorLogin ? "" : "none" }}
           >
-            Enter Valid Email and Password
+            {errorMsg}
           </div>
         </div>
       </div>
     );
   };
   const errorMessageRegister = () => {
-    {
-      console.log("hi");
-    }
     return (
       <div className="row">
         <div className="col-md text-left">
@@ -95,9 +89,7 @@ const LoginRegister = ({ location }) => {
             className="alert alert-danger"
             style={{ display: errorRegister ? "" : "none" }}
           >
-            {!text
-              ? "Enter Valid User Data"
-              : "Password length should be greater than 5"}
+            {!text ? errorMsg : "Password should be greater than 5 characters"}
           </div>
         </div>
       </div>
@@ -116,10 +108,10 @@ const LoginRegister = ({ location }) => {
           window.location.reload();
         } else {
           setErrorLogin(true);
+          setErrorMsg(data.error);
         }
 
         console.log("DATA:", data);
-        
       })
       .catch((e) => console.log(e));
   };
@@ -175,7 +167,7 @@ const LoginRegister = ({ location }) => {
                       <Tab.Pane eventKey="login">
                         <div className="login-form-container">
                           <div className="login-register-form">
-                            <form>
+                            <form id="loginform">
                               {errorMessageLogin()}
                               <input
                                 name="user-email"
@@ -191,18 +183,37 @@ const LoginRegister = ({ location }) => {
                                 value={password}
                                 onChange={handleChange("password")}
                               />
-                              <div className="button-box">
+
+                              <div className="button-box col-8">
                                 <div className="login-toggle-btn">
                                   <input type="checkbox" />
                                   <label className="ml-10">Remember me</label>
-                                  <Link to={process.env.PUBLIC_URL + "/"}>
+                                  <Link
+                                    to={
+                                      process.env.PUBLIC_URL +
+                                      "/forgot-password"
+                                    }
+                                  >
                                     Forgot Password?
                                   </Link>
                                 </div>
-                                <button type="submit" onClick={onLogin}>
-                                  <span>Login</span>
-                                </button>
+                                
                               </div>
+                              <div className="row">
+                                  <div className="button-box col-8">
+                                    <button
+                                      id="loginbuuton"
+                                      type="submit"
+                                      onClick={onLogin}
+                                    >
+                                      <span>Login</span>
+                                    </button>
+                                  </div>
+
+                                  <div className="button-box col-4">
+                                    <Googlebutton />
+                                  </div>
+                                </div>
                             </form>
                           </div>
                         </div>
@@ -223,7 +234,7 @@ const LoginRegister = ({ location }) => {
                               <input
                                 type="password"
                                 name="user-password"
-                                placeholder="Password length should be greater than 5"
+                                placeholder="Password should be greater than 5 characters"
                                 value={password}
                                 onChange={handleChange("password")}
                               />
@@ -234,10 +245,15 @@ const LoginRegister = ({ location }) => {
                                 value={email}
                                 onChange={handleChange("email")}
                               />
-                              <div className="button-box">
-                                <button type="submit" onClick={onRegister}>
-                                  <span>Register</span>
-                                </button>
+                              <div className="row">
+                                <div className="button-box col-8">
+                                  <button type="submit" onClick={onRegister}>
+                                    <span>Register</span>
+                                  </button>
+                                </div>
+                                <div className="button-box col-4">
+                                  <Googlebutton />
+                                </div>
                               </div>
                             </form>
                           </div>

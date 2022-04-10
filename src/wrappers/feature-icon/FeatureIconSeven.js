@@ -22,7 +22,9 @@ const FeatureIconSeven = ({ spaceTopClass, spaceBottomClass }) => {
                   key={key}
                 />
               );
-            })}
+            }
+            )
+            }
         </div>
       </div>
     </div>

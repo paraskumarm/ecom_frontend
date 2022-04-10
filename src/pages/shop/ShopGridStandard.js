@@ -13,12 +13,26 @@ import ShopProducts from "../../wrappers/product/ShopProducts";
 
 const ShopGridStandard = ({ location, products }) => {
   const [layout, setLayout] = useState("grid three-column");
-  const [sortType, setSortType] = useState("");
-  const [sortValue, setSortValue] = useState("");
+
+
+  const [sortTypeCategory, setSortTypeCategory] = useState("");
+  const [sortValueCategory, setSortValueCategory] = useState("");
+
+  const [sortTypeTag, setSortTypeTag] = useState("");
+  const [sortValueTag, setSortValueTag] = useState("");
+
+  const [sortTypeSize, setSortTypeSize] = useState("");
+  const [sortValueSize, setSortValueSize] = useState("");
+
+  const [sortTypeColor, setSortTypeColor] = useState("");
+  const [sortValueColor, setSortValueColor] = useState("");
+
   const [filterSortType, setFilterSortType] = useState("");
   const [filterSortValue, setFilterSortValue] = useState("");
+
   const [offset, setOffset] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+
   const [currentData, setCurrentData] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
 
@@ -29,9 +43,21 @@ const ShopGridStandard = ({ location, products }) => {
     setLayout(layout);
   };
 
-  const getSortParams = (sortType, sortValue) => {
-    setSortType(sortType);
-    setSortValue(sortValue);
+   const  getSortParamsCategory = (sortType, sortValue) => {
+    setSortTypeCategory(sortType);
+    setSortValueCategory(sortValue);
+  };
+  const getSortParamsSize = (sortType, sortValue) => {
+    setSortTypeSize(sortType);
+    setSortValueSize(sortValue);
+  };
+  const getSortParamsColor = (sortType, sortValue) => {
+    setSortTypeColor(sortType);
+    setSortValueColor(sortValue);
+  };
+  const getSortParamsTag = (sortType, sortValue) => {
+    setSortTypeTag(sortType);
+    setSortValueTag(sortValue);
   };
 
   const getFilterSortParams = (sortType, sortValue) => {
@@ -40,7 +66,31 @@ const ShopGridStandard = ({ location, products }) => {
   };
 
   useEffect(() => {
-    let sortedProducts = getSortedProducts(products, sortType, sortValue);
+    let sortedProducts = getSortedProducts(
+      products,
+      sortTypeCategory,
+      sortValueCategory
+    );
+    sortedProducts = getSortedProducts(
+      sortedProducts,
+      sortTypeCategory,
+      sortValueCategory
+    );
+    sortedProducts = getSortedProducts(
+      sortedProducts,
+      sortTypeColor,
+      sortValueColor
+    );
+    sortedProducts = getSortedProducts(
+      sortedProducts,
+      sortTypeSize,
+      sortValueSize
+    );
+    sortedProducts = getSortedProducts(
+      sortedProducts,
+      sortTypeTag,
+      sortValueTag
+    );
     const filterSortedProducts = getSortedProducts(
       sortedProducts,
       filterSortType,
@@ -49,8 +99,31 @@ const ShopGridStandard = ({ location, products }) => {
     sortedProducts = filterSortedProducts;
     setSortedProducts(sortedProducts);
     setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
-  }, [offset, products, sortType, sortValue, filterSortType, filterSortValue]);
-
+  }, [
+    offset,
+    products,
+    sortTypeCategory,
+    sortValueCategory,
+    sortTypeColor,
+    sortValueColor,
+    sortTypeTag,
+    sortValueTag,
+    sortTypeSize,
+    sortValueSize,
+    filterSortType,
+    filterSortValue,
+  ]);
+  const myfun=(e)=>{
+    e.preventDefault();
+    let filterval=document.getElementById("sidesearchbar").value.toLowerCase();
+    let search=[];
+    for(let i=0;i<products.length;i++){
+      if(products[i].name.toLowerCase().includes(filterval)){
+        search.push(products[i]);
+      }
+    }
+    setCurrentData(search);
+  }
   return (
     <Fragment>
       <MetaTags>
@@ -75,9 +148,29 @@ const ShopGridStandard = ({ location, products }) => {
             <div className="row">
               <div className="col-lg-3 order-2 order-lg-1">
                 {/* shop sidebar */}
+                <div className="sidebar-widget">
+                  <h4 className="pro-sidebar-title">Search </h4>
+                  <div className="pro-sidebar-search mb-50 mt-25">
+                    <form className="pro-sidebar-search-form" action="#">
+                      <input
+                        type="text"
+                        placeholder="Search here..."
+                        id="sidesearchbar"
+                      />
+                      <button onClick={myfun}>
+                        <i className="pe-7s-search" />
+                      </button>
+                    </form>
+                  </div>
+                </div>
                 <ShopSidebar
                   products={products}
-                  getSortParams={getSortParams}
+                  // getSortParams={getSortParams}
+                  setCurrentData={setCurrentData}
+                  getSortParamsCategory={getSortParamsCategory}
+                  getSortParamsSize={getSortParamsSize}
+                  getSortParamsColor={getSortParamsColor}
+                  getSortParamsTag={getSortParamsTag}
                   sideSpaceClass="mr-30"
                 />
               </div>

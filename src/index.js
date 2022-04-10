@@ -16,6 +16,7 @@ import * as serviceWorker from "./serviceWorker";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import { fetchCart } from "./redux/actions/cartActions";
+import { fetchWishlist } from "./redux/actions/wishlistActions";
 
 const store = createStore(
   rootReducer,
@@ -26,6 +27,7 @@ const store = createStore(
 
 store.dispatch(fetchProducts());
 store.dispatch(fetchCart());
+store.dispatch(fetchWishlist());
 
 ReactDOM.render(
   <Provider store={store}>

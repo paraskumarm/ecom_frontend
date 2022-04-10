@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Swiper from "react-id-swiper";
 import sliderData from "../../data/hero-sliders/hero-slider-twelve.json";
 
 import HeroSliderTwelveSingle from "../../components/hero-slider/HeroSliderTwelveSingle.js";
-import { useState } from "react";
+
 
 const HeroSliderTwelve = () => {
-  // const [sliderData, setsliderData] = useState([]);
-  // const [error, setError] = useState(false);
   const params = {
     effect: "fade",
     loop: true,
@@ -55,7 +53,6 @@ const HeroSliderTwelve = () => {
                 />
               );
             })}
-            {/* {console.log("outside")} */}
         </Swiper>
       </div>
     </div>

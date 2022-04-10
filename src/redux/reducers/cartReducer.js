@@ -1,4 +1,4 @@
-import uuid from "uuid/v4";
+
 import {
   ADD_TO_CART,
   DECREASE_QUANTITY,
@@ -12,15 +12,12 @@ const initState = [];
 const cartReducer = (state = initState, action) => {
   const cartItems = state,
     product = action.payload;
-  console.log("state", state);
-  let cart = [];
+
   if (action.type === FETCH_CART_SUCCESS) {
     return product;
   }
   if (action.type === ADD_TO_CART) {
     // for non variant products
-    // console.log("cartItems", cartItems);
-    console.log("id is....",action);
     if (product.variation === undefined) {
       const cartItem = cartItems.filter((item) => item.id === product.id)[0];
       if (cartItem === undefined) {
@@ -55,7 +52,6 @@ const cartReducer = (state = initState, action) => {
           product.selectedProductSize === item.selectedProductSize &&
           (product.cartItemId ? product.cartItemId === item.cartItemId : true)
       )[0];
-      console.log("when cart is undefined.....", product);
       if (cartItem === undefined) {
         return [
           ...cartItems,
