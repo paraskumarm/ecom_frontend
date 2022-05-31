@@ -47,6 +47,7 @@ const MobileNavMenu = ({ strings }) => {
             </li>
             <li>
               <Link to={process.env.PUBLIC_URL + "/orders"}>Order History</Link>
+
             </li>
 
             <li>

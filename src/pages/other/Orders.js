@@ -32,11 +32,13 @@ const Orders = ({
       product_names: " ",
       total_products: "",
       total_amount: "",
+
       quantity_info: "",
       pkarrqty: [],
       color_info: "",
       size_info: "",
       status_info: "",
+
       isPaid: false,
       created_at: "",
       updated_at: "",
@@ -138,6 +140,7 @@ const Orders = ({
         .then((data) => {
           if (data.error) {
           } else {
+
             console.log(data);
             data.reverse();
             // let pkarrqty=[2];
@@ -181,9 +184,11 @@ const Orders = ({
               data[i].products=neworders;
             }
             
+
             */
             // console.log(data);
             setorders(data);
+
           }
         })
         .catch((err) => console.log(err));
@@ -224,7 +229,9 @@ const Orders = ({
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         <Breadcrumb />
+
         {/* { console.log("orders= ",orders)} */}
+
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
             {isAuthenticated() && orders && orders.length >= 1 ? (
@@ -246,6 +253,7 @@ const Orders = ({
                           </tr>
                         </thead>
                         <tbody>
+
                           {orders.map((order,key) => {
                             // console.log(order);
                             let cartItem=order.product;
@@ -303,17 +311,21 @@ const Orders = ({
                                     order.size_info ? (
                                       <div className="cart-item-variation">
                                         <span>
+
                                           Color:{" "}
                                           {order.color_info.toUpperCase()}
                                           {/* Color: {order.color_info[key]} */}
                                         </span>
                                         <span>
                                           Size: {order.size_info}
+
                                         </span>
                                         <span>
                                           OrderDate: {getdate(order.created_at)}
                                         </span>
                                         <span>
+
+
                                           OrderTime: {gettime(order.created_at)}
                                         </span>
                                       </div>

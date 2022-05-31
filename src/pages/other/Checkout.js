@@ -87,9 +87,11 @@ const Checkout = ({ location, cartItems, currency }) => {
     // console.log(cartItems);
     cartItems.forEach(function (item) {
       product_names += item.name + " QTY=" + item.quantity +" SIZE="+item.selectedProductSize+" COLOR="+item.selectedProductColor+", ";
+
       product_name_array.push(item.name);
       price_info.push((item.price - (item.discount / 100) * item.price) * item.quantity);
       product_id.push(item.id)
+
       total_products += item.quantity;
       total_amount +=
         (item.price - (item.discount / 100) * item.price) * item.quantity;
@@ -114,6 +116,7 @@ const Checkout = ({ location, cartItems, currency }) => {
       }
     }
     pkarrqty.push(count);
+
     // console.log("qty=",pkarrqty);
 
     pkarr = JSON.stringify(pkarr);
@@ -121,9 +124,11 @@ const Checkout = ({ location, cartItems, currency }) => {
     quantity_info = JSON.stringify(quantity_info);
     color_info = JSON.stringify(color_info);
     size_info = JSON.stringify(size_info);
+
     product_name_array=JSON.stringify(product_name_array);
     price_info=JSON.stringify(price_info);
     product_id=JSON.stringify(product_id);
+
     // console.log("product_names", product_names);
     // console.log("total_products", total_products);
     // console.log("total_amount", total_amount);
@@ -132,6 +137,7 @@ const Checkout = ({ location, cartItems, currency }) => {
     // console.log("size_info", size_info);
     // console.log("status_info", status_info);
     // console.log("address_id", addressId);
+
     // console.log("product_name_array", product_name_array);
     // console.log("price_info", price_info);
     // console.log("product_id", product_id);
