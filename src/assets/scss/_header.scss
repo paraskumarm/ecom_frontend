@@ -356,7 +356,7 @@
 
           letter-spacing: 0.8px;
 
-          color: #555252;
+          color: black;
           i {
             font-size: 15px;
 
@@ -398,7 +398,7 @@
   }
 }
 .stick .main-menu.menu-white nav ul li a {
-  color: #555252;
+  color: black;
   &:hover {
     color: $theme-color;
   }
@@ -987,7 +987,7 @@
 
     letter-spacing: 0.8px;
 
-    color: #555252;
+    color: black;
     span {
       color: #ff1c1c;
     }
@@ -1044,7 +1044,7 @@
       cursor: pointer;
       letter-spacing: 0.8px;
 
-      color: #555252;
+      color: black;
       @media #{$xs-layout} {
         line-height: 35px;
       }
@@ -1057,7 +1057,7 @@
         position: relative;
         top: 2px;
 
-        color: #555252;
+        color: black;
       }
     }
     .lang-car-dropdown {
@@ -1102,7 +1102,7 @@
 
       letter-spacing: 0.8px;
 
-      color: #555252;
+      color: black;
     }
     &:hover {
       & > a,

@@ -80,10 +80,16 @@ const Checkout = ({ location, cartItems, currency }) => {
     let color_info = [];
     let size_info = [];
     let status_info = [];
+    let product_name_array = [];
+    let price_info = [];
+    let product_id = [];
     const addressId = localStorage.getItem("address_id");
     // console.log(cartItems);
     cartItems.forEach(function (item) {
       product_names += item.name + " QTY=" + item.quantity +" SIZE="+item.selectedProductSize+" COLOR="+item.selectedProductColor+", ";
+      product_name_array.push(item.name);
+      price_info.push((item.price - (item.discount / 100) * item.price) * item.quantity);
+      product_id.push(item.id)
       total_products += item.quantity;
       total_amount +=
         (item.price - (item.discount / 100) * item.price) * item.quantity;
@@ -108,12 +114,16 @@ const Checkout = ({ location, cartItems, currency }) => {
       }
     }
     pkarrqty.push(count);
-    console.log("qty=",pkarrqty);
+    // console.log("qty=",pkarrqty);
+
     pkarr = JSON.stringify(pkarr);
     pkarrqty = JSON.stringify(pkarrqty);
     quantity_info = JSON.stringify(quantity_info);
     color_info = JSON.stringify(color_info);
     size_info = JSON.stringify(size_info);
+    product_name_array=JSON.stringify(product_name_array);
+    price_info=JSON.stringify(price_info);
+    product_id=JSON.stringify(product_id);
     // console.log("product_names", product_names);
     // console.log("total_products", total_products);
     // console.log("total_amount", total_amount);
@@ -122,6 +132,9 @@ const Checkout = ({ location, cartItems, currency }) => {
     // console.log("size_info", size_info);
     // console.log("status_info", status_info);
     // console.log("address_id", addressId);
+    // console.log("product_name_array", product_name_array);
+    // console.log("price_info", price_info);
+    // console.log("product_id", product_id);
     const userId = isAuthenticated() && isAuthenticated().user.id;
     const token = isAuthenticated() && isAuthenticated().token;
     let bodyData = new FormData();
@@ -134,6 +147,9 @@ const Checkout = ({ location, cartItems, currency }) => {
     bodyData.append("color_info", color_info);
     bodyData.append("size_info", size_info);
     bodyData.append("status_info", status_info);
+    bodyData.append("product_name_array", product_name_array);
+    bodyData.append("price_info", price_info);
+    bodyData.append("product_id", product_id);
     setprocesspay(true);
     seterror(false);
     processPayment(userId, token, addressId, bodyData)
@@ -183,8 +199,8 @@ const Checkout = ({ location, cartItems, currency }) => {
                 ? "No items found in cart to checkout "
                 : "Login First"}
               <br />{" "}
-              <Link to={process.env.PUBLIC_URL + "/login-register"}>
-                Login Now
+              <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+                Shop Now
               </Link>
             </div>
           </div>

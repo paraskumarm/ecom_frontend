@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
+import { isAuthenticated } from "../../../helpers/auth";
 
 const MobileNavMenu = ({ strings }) => {
   return (
@@ -47,16 +48,19 @@ const MobileNavMenu = ({ strings }) => {
             <li>
               <Link to={process.env.PUBLIC_URL + "/orders"}>Order History</Link>
             </li>
+
             <li>
               <Link to={process.env.PUBLIC_URL + "/my-account"}>
                 {strings["my_account"]}
               </Link>
             </li>
-            <li>
-              <Link to={process.env.PUBLIC_URL + "/login-register"}>
-                {strings["login_register"]}
-              </Link>
-            </li>
+            {!isAuthenticated() && (
+              <li>
+                <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                  {strings["login_register"]}
+                </Link>
+              </li>
+            )}
             <li>
               <Link to={process.env.PUBLIC_URL + "/about"}>
                 {strings["about_us"]}
@@ -69,7 +73,7 @@ const MobileNavMenu = ({ strings }) => {
             </li>
           </ul>
         </li>
-        
+
         <li>
           <Link to={process.env.PUBLIC_URL + "/contact"}>
             Book An Appointment

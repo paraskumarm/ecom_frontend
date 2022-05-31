@@ -32,11 +32,11 @@ const Orders = ({
       product_names: " ",
       total_products: "",
       total_amount: "",
-      quantity_info: [],
+      quantity_info: "",
       pkarrqty: [],
-      color_info: [],
-      size_info: [],
-      status_info: [],
+      color_info: "",
+      size_info: "",
+      status_info: "",
       isPaid: false,
       created_at: "",
       updated_at: "",
@@ -93,7 +93,7 @@ const Orders = ({
           user_permissions: [],
         },
       },
-      products: [
+      product: 
         {
           url: "",
           name: "",
@@ -129,7 +129,7 @@ const Orders = ({
             },
           ],
         },
-      ],
+      
     },
   ]);
   const loadOrderHistory = () => {
@@ -138,12 +138,12 @@ const Orders = ({
         .then((data) => {
           if (data.error) {
           } else {
-            
+            console.log(data);
             data.reverse();
             // let pkarrqty=[2];
 
-            for (let i = 0; i < data.length; i++) {
-              
+            /*
+            for (let i = 0; i < data.length; i++) {              
               let quantity_info = data[i].quantity_info;
               quantity_info = quantity_info.slice(1, quantity_info.length - 1);
               quantity_info = quantity_info.split(",");
@@ -181,10 +181,9 @@ const Orders = ({
               data[i].products=neworders;
             }
             
-            
+            */
             // console.log(data);
             setorders(data);
-           
           }
         })
         .catch((err) => console.log(err));
@@ -225,7 +224,7 @@ const Orders = ({
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         <Breadcrumb />
-{/* { console.log("orders= ",orders)} */}
+        {/* { console.log("orders= ",orders)} */}
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
             {isAuthenticated() && orders && orders.length >= 1 ? (
@@ -247,9 +246,11 @@ const Orders = ({
                           </tr>
                         </thead>
                         <tbody>
-                          {orders.map((order) => {
+                          {orders.map((order,key) => {
                             // console.log(order);
-                            return order.products.map((cartItem, key) => {
+                            let cartItem=order.product;
+                            // return order.product.map(
+                            //   (cartItem, key) => {
                               const discountedPrice = getDiscountPrice(
                                 cartItem.price,
                                 cartItem.discount
@@ -269,11 +270,12 @@ const Orders = ({
                               return (
                                 <tr key={key}>
                                   <td className="product-thumbnail">
+                                    
                                     <Link
                                       to={
                                         process.env.PUBLIC_URL +
-                                        "/product-tab-left/" //+
-                                        // cartItem.id
+                                        "/product-tab-left/" +
+                                        cartItem.url.substring(cartItem.url.length-2,cartItem.url.length-1)
                                       }
                                     >
                                       <img
@@ -291,22 +293,22 @@ const Orders = ({
                                     <Link
                                       to={
                                         process.env.PUBLIC_URL +
-                                        "/product-tab-left/" //+
-                                        // cartItem.id
+                                        "/product-tab-left/" +
+                                        cartItem.url.substring(cartItem.url.length-2,cartItem.url.length-1)
                                       }
                                     >
                                       {cartItem.name}
                                     </Link>
-                                    {order.color_info[key] &&
-                                    order.size_info[key] ? (
+                                    {order.color_info &&
+                                    order.size_info ? (
                                       <div className="cart-item-variation">
                                         <span>
-                                          Color: {order.color_info[key].toUpperCase()}
-
+                                          Color:{" "}
+                                          {order.color_info.toUpperCase()}
                                           {/* Color: {order.color_info[key]} */}
                                         </span>
                                         <span>
-                                          Size: {order.size_info[key]}
+                                          Size: {order.size_info}
                                         </span>
                                         <span>
                                           OrderDate: {getdate(order.created_at)}
@@ -338,28 +340,29 @@ const Orders = ({
                                   </td>
 
                                   <td className="product-quantity">
-                                    {order.quantity_info[key]}
+                                    {order.quantity_info}
                                   </td>
                                   <td className="product-subtotal">
                                     {discountedPrice !== null
                                       ? "Rs." +
                                         (
                                           finalDiscountedPrice *
-                                          order.quantity_info[key]
+                                          order.quantity_info
                                         ).toFixed(2)
                                       : "Rs." +
                                         (
                                           finalProductPrice *
-                                          order.quantity_info[key]
+                                          order.quantity_info
                                         ).toFixed(2)}
                                   </td>
 
                                   <td className="product-remove">
-                                    {order.status_info[key]}
+                                    {order.status_info}
                                   </td>
                                 </tr>
-                              );
-                            });
+                            //   );
+                            // }
+                            );
                           })}
                         </tbody>
                       </table>

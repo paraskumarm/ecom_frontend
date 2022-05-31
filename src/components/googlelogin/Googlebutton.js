@@ -17,8 +17,10 @@ function Googlebutton() {
     console.log("Login Success:", res);
     let token = res.tokenObj.access_token;
     console.log(token);
-    let email = res.Du.tv;
-    let name = res.Du.tf;
+    // let email = res.Du.tv;
+    // let name = res.Du.tf;
+    let email = res.profileObj.email;
+    let name = res.profileObj.name;
     console.log(name);
     console.log(email);
     googlesignin({ name,email, token })

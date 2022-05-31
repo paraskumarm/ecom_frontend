@@ -261,7 +261,7 @@ const ProductDescriptionInfo = ({
               return (
                 <li key={key}>
                   <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                    {single}
+                    {single[0].toUpperCase()+single.substring(1)}
                   </Link>
                 </li>
               );
@@ -279,7 +279,7 @@ const ProductDescriptionInfo = ({
               return (
                 <li key={key}>
                   <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
-                    {single}
+                  {single[0].toUpperCase()+single.substring(1)}
                   </Link>
                 </li>
               );

@@ -66,6 +66,7 @@ export const processPayment = async (userId, token, addressId, orderData) => {
     // all the necessary credentials, and we will pass it to the handleSuccess() func
     //  for the further process
     if (res) {
+      console.log(res);
       handleSuccess(res.data.param_dict);
     }
   });
