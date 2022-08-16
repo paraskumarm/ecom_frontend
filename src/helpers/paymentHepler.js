@@ -19,7 +19,7 @@ const handleSuccess = (res) => {
 
   //create a form that will send necessary details to the paytm
   let frm = document.createElement("form");
-  frm.action = "https://securegw-stage.paytm.in/order/process/";//local
+  frm.action = "https://securegw-stage.paytm.in/order/process/"; //local
   // frm.action = "https://securegw.paytm.in/order/process/";//prod
   frm.method = "post";
   frm.name = "paytmForm";
@@ -45,7 +45,7 @@ const handleSuccess = (res) => {
   deleteAllFromUserCart(isAuthenticated().user.id)
     .then((res) => console.log(res))
     .catch((e) => console.log(e));
-  // if you remember, the param_dict also has "'CALLBACK_URL': 'http://127.0.0.1:8000/api/handlepayment/'"
+  // if you remember, the param_dict also has "'CALLBACK_URL': 'http://127.0.0.1/api/handlepayment/'"
   // so as soon as Paytm gets the payment it will hit that callback URL with some response and
   // on the basis of that response we are displaying the "payment successful" or "failed" message
 };
