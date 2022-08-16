@@ -12,11 +12,8 @@ const NotFound = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Not Found</title>
-        <meta
-          name="description"
-          content="404 page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Not Found</title>
+        <meta name="description" content="404 page of Darzi Warzi." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
@@ -62,7 +59,7 @@ const NotFound = ({ location }) => {
 };
 
 NotFound.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 export default NotFound;

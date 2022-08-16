@@ -39,11 +39,8 @@ const Cart = ({
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Cart</title>
-        <meta
-          name="description"
-          content="Cart page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Cart</title>
+        <meta name="description" content="Cart page of Darzi Warzi." />
       </MetaTags>
 
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
@@ -314,7 +311,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (item, addToast, quantityCount) => {
-      dispatch(addToCart(item, addToast, quantityCount,item.selectedProductColor,item.selectedProductSize));
+      dispatch(
+        addToCart(
+          item,
+          addToast,
+          quantityCount,
+          item.selectedProductColor,
+          item.selectedProductSize
+        )
+      );
     },
     decreaseQuantity: (item, addToast) => {
       dispatch(decreaseQuantity(item, addToast));

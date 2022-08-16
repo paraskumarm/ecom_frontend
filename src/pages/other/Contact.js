@@ -12,7 +12,7 @@ const Contact = ({ location }) => {
   const [sent, setsent] = useState(false);
   const send = (e) => {
     e.preventDefault();
-    if(!name||!email||!subject||!msg){
+    if (!name || !email || !subject || !msg) {
       seterror(true);
       return;
     }
@@ -70,11 +70,8 @@ const Contact = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Contact</title>
-        <meta
-          name="description"
-          content="Contact of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Contact</title>
+        <meta name="description" content="Contact of Darzi Warzi." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
@@ -87,7 +84,6 @@ const Contact = ({ location }) => {
         <div className="contact-area pt-100 pb-100">
           <div className="container">
             <div className="custom-row-2">
-              
               <div className="col-lg-8 col-md-7">
                 <div className="contact-form">
                   <div className="contact-title mb-30">
@@ -147,7 +143,6 @@ const Contact = ({ location }) => {
                   <p className="form-messege" />
                 </div>
               </div>
-
 
               <div className="col-lg-4 col-md-5">
                 <div className="contact-info-wrap">

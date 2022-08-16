@@ -32,7 +32,6 @@ const ShopGridFilter = ({ location, products }) => {
     setSortType(sortType);
     setSortValue(sortValue);
   };
-  
 
   const getFilterSortParams = (sortType, sortValue) => {
     setFilterSortType(sortType);
@@ -54,11 +53,8 @@ const ShopGridFilter = ({ location, products }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Shop Page</title>
-        <meta
-          name="description"
-          content="Shop page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Shop Page</title>
+        <meta name="description" content="Shop page of Darzi Warzi." />
       </MetaTags>
 
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>

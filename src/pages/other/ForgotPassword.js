@@ -53,13 +53,12 @@ const ForgotPassword = ({ location }) => {
           setErrorRegister(true);
           setText(false);
           setErrorMsg(data.email);
-        }else{
+        } else {
           setSuccessRegister(true);
-document.getElementById("loginbuuton").click();
+          document.getElementById("loginbuuton").click();
         }
       })
       .catch((e) => console.log(e));
-
   };
   const [reload, setReload] = useState(false);
   const [errorLogin, setErrorLogin] = useState(false);
@@ -76,14 +75,12 @@ document.getElementById("loginbuuton").click();
             style={{ display: errorLogin ? "" : "none" }}
           >
             {errorMsg}
-
           </div>
         </div>
       </div>
     );
   };
   const errorMessageRegister = () => {
-    
     return (
       <div className="row">
         <div className="col-md text-left">
@@ -91,9 +88,7 @@ document.getElementById("loginbuuton").click();
             className="alert alert-danger"
             style={{ display: errorRegister ? "" : "none" }}
           >
-            {!text
-              ? errorMsg 
-              : "Password should be greater than 5 characters"}
+            {!text ? errorMsg : "Password should be greater than 5 characters"}
           </div>
         </div>
       </div>
@@ -116,7 +111,6 @@ document.getElementById("loginbuuton").click();
         }
 
         console.log("DATA:", data);
-        
       })
       .catch((e) => console.log(e));
   };
@@ -137,15 +131,12 @@ document.getElementById("loginbuuton").click();
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Login</title>
-        <meta
-          name="description"
-          content="Compare page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Login</title>
+        <meta name="description" content="Compare page of Darzi Warzi." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Reset Password  
+        Reset Password
       </BreadcrumbsItem>
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
@@ -184,8 +175,11 @@ document.getElementById("loginbuuton").click();
                                 onChange={handleChange("password")}
                               />
                               <div className="button-box">
-                                
-                                <button id="loginbuuton"type="submit" onClick={onLogin}>
+                                <button
+                                  id="loginbuuton"
+                                  type="submit"
+                                  onClick={onLogin}
+                                >
                                   <span>Login</span>
                                 </button>
                               </div>

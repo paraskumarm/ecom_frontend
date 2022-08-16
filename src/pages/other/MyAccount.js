@@ -46,7 +46,7 @@ const MyAccount = ({ location }) => {
           email: response.email,
           phone: response.phone,
         });
-        // console.log("USERDATA", response); 
+        // console.log("USERDATA", response);
       })
       .catch((e) => console.log(e));
   };
@@ -187,11 +187,8 @@ const MyAccount = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | My Account</title>
-        <meta
-          name="description"
-          content="Compare page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|My Account</title>
+        <meta name="description" content="Compare page of Darzi Warzi." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>

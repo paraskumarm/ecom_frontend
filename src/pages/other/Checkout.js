@@ -86,11 +86,21 @@ const Checkout = ({ location, cartItems, currency }) => {
     const addressId = localStorage.getItem("address_id");
     // console.log(cartItems);
     cartItems.forEach(function (item) {
-      product_names += item.name + " QTY=" + item.quantity +" SIZE="+item.selectedProductSize+" COLOR="+item.selectedProductColor+", ";
+      product_names +=
+        item.name +
+        " QTY=" +
+        item.quantity +
+        " SIZE=" +
+        item.selectedProductSize +
+        " COLOR=" +
+        item.selectedProductColor +
+        ", ";
 
       product_name_array.push(item.name);
-      price_info.push((item.price - (item.discount / 100) * item.price) * item.quantity);
-      product_id.push(item.id)
+      price_info.push(
+        (item.price - (item.discount / 100) * item.price) * item.quantity
+      );
+      product_id.push(item.id);
 
       total_products += item.quantity;
       total_amount +=
@@ -125,9 +135,9 @@ const Checkout = ({ location, cartItems, currency }) => {
     color_info = JSON.stringify(color_info);
     size_info = JSON.stringify(size_info);
 
-    product_name_array=JSON.stringify(product_name_array);
-    price_info=JSON.stringify(price_info);
-    product_id=JSON.stringify(product_id);
+    product_name_array = JSON.stringify(product_name_array);
+    price_info = JSON.stringify(price_info);
+    product_id = JSON.stringify(product_id);
 
     // console.log("product_names", product_names);
     // console.log("total_products", total_products);
@@ -217,11 +227,8 @@ const Checkout = ({ location, cartItems, currency }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Checkout</title>
-        <meta
-          name="description"
-          content="Checkout page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Checkout</title>
+        <meta name="description" content="Checkout page of Darzi Warzi." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>

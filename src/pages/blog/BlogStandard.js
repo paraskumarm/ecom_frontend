@@ -14,11 +14,8 @@ const BlogStandard = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Blog</title>
-        <meta
-          name="description"
-          content="Blog of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Blog</title>
+        <meta name="description" content="Blog of Darzi Warzi." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
@@ -54,7 +51,7 @@ const BlogStandard = ({ location }) => {
 };
 
 BlogStandard.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 export default BlogStandard;

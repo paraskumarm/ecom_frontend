@@ -14,7 +14,6 @@ import ShopProducts from "../../wrappers/product/ShopProducts";
 const ShopGridStandard = ({ location, products }) => {
   const [layout, setLayout] = useState("grid three-column");
 
-
   const [sortTypeCategory, setSortTypeCategory] = useState("");
   const [sortValueCategory, setSortValueCategory] = useState("");
 
@@ -43,7 +42,7 @@ const ShopGridStandard = ({ location, products }) => {
     setLayout(layout);
   };
 
-   const  getSortParamsCategory = (sortType, sortValue) => {
+  const getSortParamsCategory = (sortType, sortValue) => {
     setSortTypeCategory(sortType);
     setSortValueCategory(sortValue);
   };
@@ -113,25 +112,24 @@ const ShopGridStandard = ({ location, products }) => {
     filterSortType,
     filterSortValue,
   ]);
-  const myfun=(e)=>{
+  const myfun = (e) => {
     e.preventDefault();
-    let filterval=document.getElementById("sidesearchbar").value.toLowerCase();
-    let search=[];
-    for(let i=0;i<products.length;i++){
-      if(products[i].name.toLowerCase().includes(filterval)){
+    let filterval = document
+      .getElementById("sidesearchbar")
+      .value.toLowerCase();
+    let search = [];
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].name.toLowerCase().includes(filterval)) {
         search.push(products[i]);
       }
     }
     setCurrentData(search);
-  }
+  };
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Shop Page</title>
-        <meta
-          name="description"
-          content="Shop page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Shop Page</title>
+        <meta name="description" content="Shop page of Darzi Warzi." />
       </MetaTags>
 
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>

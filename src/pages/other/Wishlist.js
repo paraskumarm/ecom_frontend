@@ -30,11 +30,8 @@ const Wishlist = ({
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Wishlist</title>
-        <meta
-          name="description"
-          content="Wishlist page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Wishlist</title>
+        <meta name="description" content="Wishlist page of Darzi Warzi." />
       </MetaTags>
 
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>

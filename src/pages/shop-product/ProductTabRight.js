@@ -15,11 +15,8 @@ const ProductTabRight = ({ location, product }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Product Page</title>
-        <meta
-          name="description"
-          content="Product page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Product Page</title>
+        <meta name="description" content="Product page of Darzi Warzi." />
       </MetaTags>
 
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>

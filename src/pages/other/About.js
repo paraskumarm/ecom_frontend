@@ -17,10 +17,10 @@ const About = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | About us</title>
+        <title>Darzi Warzi|About us</title>
         <meta
           name="description"
-          content="About page of flone react minimalist eCommerce template."
+          content="About page of Darzi Warzi."
         />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
@@ -58,7 +58,7 @@ const About = ({ location }) => {
 };
 
 About.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 export default About;

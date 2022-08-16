@@ -132,11 +132,8 @@ const LoginRegister = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Login</title>
-        <meta
-          name="description"
-          content="Compare page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Login</title>
+        <meta name="description" content="Compare page of Darzi Warzi." />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
@@ -197,23 +194,22 @@ const LoginRegister = ({ location }) => {
                                     Forgot Password?
                                   </Link>
                                 </div>
-                                
                               </div>
                               <div className="row">
-                                  <div className="button-box col-8">
-                                    <button
-                                      id="loginbuuton"
-                                      type="submit"
-                                      onClick={onLogin}
-                                    >
-                                      <span>Login</span>
-                                    </button>
-                                  </div>
-
-                                  <div className="button-box col-4">
-                                    <Googlebutton />
-                                  </div>
+                                <div className="button-box col-8">
+                                  <button
+                                    id="loginbuuton"
+                                    type="submit"
+                                    onClick={onLogin}
+                                  >
+                                    <span>Login</span>
+                                  </button>
                                 </div>
+
+                                <div className="button-box col-4">
+                                  <Googlebutton />
+                                </div>
+                              </div>
                             </form>
                           </div>
                         </div>

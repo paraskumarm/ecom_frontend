@@ -95,43 +95,41 @@ const Orders = ({
           user_permissions: [],
         },
       },
-      product: 
-        {
-          url: "",
-          name: "",
-          price: "",
-          discount: 0,
-          offerEnd: "",
-          new: false,
-          rating: 0,
-          saleCount: 0,
-          category: [],
-          tag: [],
-          image1: "",
-          image2: "",
-          image3: "",
-          image4: "",
-          image5: "",
-          shortDescription: "",
-          fullDescription: "",
-          created_at: "",
-          updated_at: "",
-          variation: [
-            {
-              url: "",
-              color: "",
-              image: null,
-              size: [
-                {
-                  url: "",
-                  name: "",
-                  stock: 0,
-                },
-              ],
-            },
-          ],
-        },
-      
+      product: {
+        url: "",
+        name: "",
+        price: "",
+        discount: 0,
+        offerEnd: "",
+        new: false,
+        rating: 0,
+        saleCount: 0,
+        category: [],
+        tag: [],
+        image1: "",
+        image2: "",
+        image3: "",
+        image4: "",
+        image5: "",
+        shortDescription: "",
+        fullDescription: "",
+        created_at: "",
+        updated_at: "",
+        variation: [
+          {
+            url: "",
+            color: "",
+            image: null,
+            size: [
+              {
+                url: "",
+                name: "",
+                stock: 0,
+              },
+            ],
+          },
+        ],
+      },
     },
   ]);
   const loadOrderHistory = () => {
@@ -140,7 +138,6 @@ const Orders = ({
         .then((data) => {
           if (data.error) {
           } else {
-
             console.log(data);
             data.reverse();
             // let pkarrqty=[2];
@@ -188,7 +185,6 @@ const Orders = ({
             */
             // console.log(data);
             setorders(data);
-
           }
         })
         .catch((err) => console.log(err));
@@ -216,11 +212,8 @@ const Orders = ({
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Orders</title>
-        <meta
-          name="description"
-          content="Orders page of flone react minimalist eCommerce template."
-        />
+        <title>Darzi Warzi|Orders</title>
+        <meta name="description" content="Orders page of Darzi Warzi." />
       </MetaTags>
 
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
@@ -253,127 +246,121 @@ const Orders = ({
                           </tr>
                         </thead>
                         <tbody>
-
-                          {orders.map((order,key) => {
+                          {orders.map((order, key) => {
                             // console.log(order);
-                            let cartItem=order.product;
+                            let cartItem = order.product;
                             // return order.product.map(
                             //   (cartItem, key) => {
-                              const discountedPrice = getDiscountPrice(
-                                cartItem.price,
-                                cartItem.discount
-                              );
-                              const finalProductPrice = (
-                                cartItem.price * currency.currencyRate
-                              ).toFixed(2);
-                              const finalDiscountedPrice = (
-                                discountedPrice * currency.currencyRate
-                              ).toFixed(2);
+                            const discountedPrice = getDiscountPrice(
+                              cartItem.price,
+                              cartItem.discount
+                            );
+                            const finalProductPrice = (
+                              cartItem.price * currency.currencyRate
+                            ).toFixed(2);
+                            const finalDiscountedPrice = (
+                              discountedPrice * currency.currencyRate
+                            ).toFixed(2);
 
-                              discountedPrice != null
-                                ? (cartTotalPrice +=
-                                    finalDiscountedPrice * cartItem.quantity)
-                                : (cartTotalPrice +=
-                                    finalProductPrice * cartItem.quantity);
-                              return (
-                                <tr key={key}>
-                                  <td className="product-thumbnail">
-                                    
-                                    <Link
-                                      to={
-                                        process.env.PUBLIC_URL +
-                                        "/product-tab-left/" +
-                                        cartItem.url.substring(cartItem.url.length-2,cartItem.url.length-1)
+                            discountedPrice != null
+                              ? (cartTotalPrice +=
+                                  finalDiscountedPrice * cartItem.quantity)
+                              : (cartTotalPrice +=
+                                  finalProductPrice * cartItem.quantity);
+                            return (
+                              <tr key={key}>
+                                <td className="product-thumbnail">
+                                  <Link
+                                    to={
+                                      process.env.PUBLIC_URL +
+                                      "/product-tab-left/" +
+                                      cartItem.url.substring(
+                                        cartItem.url.length - 2,
+                                        cartItem.url.length - 1
+                                      )
+                                    }
+                                  >
+                                    <img
+                                      className="img-fluid"
+                                      src={
+                                        process.env.PUBLIC_URL + cartItem.image1
                                       }
-                                    >
-                                      <img
-                                        className="img-fluid"
-                                        src={
-                                          process.env.PUBLIC_URL +
-                                          cartItem.image1
-                                        }
-                                        alt=""
-                                      />
-                                    </Link>
-                                  </td>
+                                      alt=""
+                                    />
+                                  </Link>
+                                </td>
 
-                                  <td className="product-name">
-                                    <Link
-                                      to={
-                                        process.env.PUBLIC_URL +
-                                        "/product-tab-left/" +
-                                        cartItem.url.substring(cartItem.url.length-2,cartItem.url.length-1)
-                                      }
-                                    >
-                                      {cartItem.name}
-                                    </Link>
-                                    {order.color_info &&
-                                    order.size_info ? (
-                                      <div className="cart-item-variation">
-                                        <span>
+                                <td className="product-name">
+                                  <Link
+                                    to={
+                                      process.env.PUBLIC_URL +
+                                      "/product-tab-left/" +
+                                      cartItem.url.substring(
+                                        cartItem.url.length - 2,
+                                        cartItem.url.length - 1
+                                      )
+                                    }
+                                  >
+                                    {cartItem.name}
+                                  </Link>
+                                  {order.color_info && order.size_info ? (
+                                    <div className="cart-item-variation">
+                                      <span>
+                                        Color: {order.color_info.toUpperCase()}
+                                        {/* Color: {order.color_info[key]} */}
+                                      </span>
+                                      <span>Size: {order.size_info}</span>
+                                      <span>
+                                        OrderDate: {getdate(order.created_at)}
+                                      </span>
+                                      <span>
+                                        OrderTime: {gettime(order.created_at)}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    ""
+                                  )}
+                                </td>
 
-                                          Color:{" "}
-                                          {order.color_info.toUpperCase()}
-                                          {/* Color: {order.color_info[key]} */}
-                                        </span>
-                                        <span>
-                                          Size: {order.size_info}
-
-                                        </span>
-                                        <span>
-                                          OrderDate: {getdate(order.created_at)}
-                                        </span>
-                                        <span>
-
-
-                                          OrderTime: {gettime(order.created_at)}
-                                        </span>
-                                      </div>
-                                    ) : (
-                                      ""
-                                    )}
-                                  </td>
-
-                                  <td className="product-price-cart">
-                                    {discountedPrice !== null ? (
-                                      <Fragment>
-                                        <span className="amount old">
-                                          {"Rs." + finalProductPrice}
-                                        </span>
-                                        <span className="amount">
-                                          {"Rs." + finalDiscountedPrice}
-                                        </span>
-                                      </Fragment>
-                                    ) : (
-                                      <span className="amount">
+                                <td className="product-price-cart">
+                                  {discountedPrice !== null ? (
+                                    <Fragment>
+                                      <span className="amount old">
                                         {"Rs." + finalProductPrice}
                                       </span>
-                                    )}
-                                  </td>
+                                      <span className="amount">
+                                        {"Rs." + finalDiscountedPrice}
+                                      </span>
+                                    </Fragment>
+                                  ) : (
+                                    <span className="amount">
+                                      {"Rs." + finalProductPrice}
+                                    </span>
+                                  )}
+                                </td>
 
-                                  <td className="product-quantity">
-                                    {order.quantity_info}
-                                  </td>
-                                  <td className="product-subtotal">
-                                    {discountedPrice !== null
-                                      ? "Rs." +
-                                        (
-                                          finalDiscountedPrice *
-                                          order.quantity_info
-                                        ).toFixed(2)
-                                      : "Rs." +
-                                        (
-                                          finalProductPrice *
-                                          order.quantity_info
-                                        ).toFixed(2)}
-                                  </td>
+                                <td className="product-quantity">
+                                  {order.quantity_info}
+                                </td>
+                                <td className="product-subtotal">
+                                  {discountedPrice !== null
+                                    ? "Rs." +
+                                      (
+                                        finalDiscountedPrice *
+                                        order.quantity_info
+                                      ).toFixed(2)
+                                    : "Rs." +
+                                      (
+                                        finalProductPrice * order.quantity_info
+                                      ).toFixed(2)}
+                                </td>
 
-                                  <td className="product-remove">
-                                    {order.status_info}
-                                  </td>
-                                </tr>
-                            //   );
-                            // }
+                                <td className="product-remove">
+                                  {order.status_info}
+                                </td>
+                              </tr>
+                              //   );
+                              // }
                             );
                           })}
                         </tbody>
