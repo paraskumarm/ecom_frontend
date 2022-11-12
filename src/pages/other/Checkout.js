@@ -75,7 +75,7 @@ const Checkout = ({ location, cartItems, currency }) => {
     let total_products = 0;
     let total_amount = 0;
     let pkarr = [];
-    // let pkarrqty=[];
+    
     let quantity_info = [];
     let color_info = [];
     let size_info = [];
@@ -84,7 +84,7 @@ const Checkout = ({ location, cartItems, currency }) => {
     let price_info = [];
     let product_id = [];
     const addressId = localStorage.getItem("address_id");
-    // console.log(cartItems);
+  
     cartItems.forEach(function (item) {
       product_names +=
         item.name +
@@ -111,26 +111,7 @@ const Checkout = ({ location, cartItems, currency }) => {
       size_info.push(item.selectedProductSize);
       status_info.push("Order Recieved");
     });
-    // console.log(pkarr);
-    // let pkarr=[104,101,101,104];
-    let pkarrqty = [];
-    pkarr.sort();
-    let count = 1;
-    let prev = pkarr[0];
-    for (let i = 1; i < pkarr.length; i++) {
-      if (prev == pkarr[i]) count++;
-      else {
-        pkarrqty.push(count);
-        count = 1;
-        prev = pkarr[i];
-      }
-    }
-    pkarrqty.push(count);
-
-    // console.log("qty=",pkarrqty);
-
-    pkarr = JSON.stringify(pkarr);
-    pkarrqty = JSON.stringify(pkarrqty);
+    
     quantity_info = JSON.stringify(quantity_info);
     color_info = JSON.stringify(color_info);
     size_info = JSON.stringify(size_info);
@@ -139,26 +120,12 @@ const Checkout = ({ location, cartItems, currency }) => {
     price_info = JSON.stringify(price_info);
     product_id = JSON.stringify(product_id);
 
-    // console.log("product_names", product_names);
-    // console.log("total_products", total_products);
-    // console.log("total_amount", total_amount);
-    // console.log("pkarr", pkarr);
-    // console.log("color_info", color_info);
-    // console.log("size_info", size_info);
-    // console.log("status_info", status_info);
-    // console.log("address_id", addressId);
-
-    // console.log("product_name_array", product_name_array);
-    // console.log("price_info", price_info);
-    // console.log("product_id", product_id);
     const userId = isAuthenticated() && isAuthenticated().user.id;
     const token = isAuthenticated() && isAuthenticated().token;
     let bodyData = new FormData();
     bodyData.append("product_names", product_names);
     bodyData.append("total_products", total_products);
     bodyData.append("total_amount", total_amount);
-    bodyData.append("pkarr", pkarr);
-    bodyData.append("pkarrqty", pkarrqty);
     bodyData.append("quantity_info", quantity_info);
     bodyData.append("color_info", color_info);
     bodyData.append("size_info", size_info);
