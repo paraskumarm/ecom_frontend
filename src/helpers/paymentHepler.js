@@ -65,7 +65,11 @@ export const processPayment = async (userId, token, addressId, orderData) => {
     // we will retrieve the param_dict that we are sending from the backend with
     // all the necessary credentials, and we will pass it to the handleSuccess() func
     //  for the further process
-    if (res) {
+    // console.log(res);
+    let len=Object.keys(res.data.param_dict).length;
+    // console.log("bI");/
+    if (res&&len) {
+      // console.log("HI");
       handleSuccess(res.data.param_dict);
     }
   });
