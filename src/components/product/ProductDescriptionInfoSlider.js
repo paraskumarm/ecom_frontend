@@ -73,10 +73,10 @@ const ProductDescriptionInfoSlider = ({
               {product.variation.map((single, key) => {
                 return (
                   <label
-                  // style={{
-                  //   color: "white",
-                  //   backgroundColor: "DodgerBlue"
-                  // }}
+                    // style={{
+                    //   color: "white",
+                    //   backgroundColor: "DodgerBlue"
+                    // }}
                     className={`pro-details-color-content--single ${single.color} `}
                     key={key}
                   >
