@@ -5,24 +5,14 @@
     "subtitle": "Final Sale",
     "text": "40% off Summer Vacation",
     "image": "/assets/img/slider/DW-slider-1.jpeg",
-    "url": "/shop-grid-standard"
+    "url": "/shop-grid"
   },
   {
     "id": 2,
-
     "title": "New Arrival",
     "subtitle": "Final Sale",
     "text": "40% off Summer Vacation",
     "image": "/assets/img/slider/DW-slider-2.jpg",
-    "url": "/shop-grid-standard"
-  },
-  {
-    "id": 3,
-
-    "title": "New Arrival",
-    "subtitle": "Final Sale",
-    "text": "40% off Summer Vacation",
-    "image": "/assets/img/slider/slider-4.jpg",
-    "url": "/shop-grid-standard"
+    "url": "/shop-grid"
   }
 ]

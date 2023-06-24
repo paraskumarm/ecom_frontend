@@ -33,11 +33,7 @@ const ProductTabLeft = lazy(() =>
 //   import("./pages/shop-product/ProductFixedImage")
 // );
 
-// blog pages
-const BlogStandard = lazy(() => import("./pages/blog/BlogStandard"));
-
 // other pages
-const About = lazy(() => import("./pages/other/About"));
 const Contact = lazy(() => import("./pages/other/Contact"));
 const MyAccount = lazy(() => import("./pages/other/MyAccount"));
 const LoginRegister = lazy(() => import("./pages/other/LoginRegister"));
@@ -101,19 +97,9 @@ const App = (props) => {
                   component={ProductTabLeft}
                 />
 
-                {/* Blog pages */}
-                <Route
-                  exact
-                  path={process.env.PUBLIC_URL + "/blog-standard"}
-                  component={BlogStandard}
-                />
 
                 {/* Other pages */}
-                <Route
-                  exact
-                  path={process.env.PUBLIC_URL + "/about"}
-                  component={About}
-                />
+                
                 <Route
                   exact
                   path={process.env.PUBLIC_URL + "/contact"}
