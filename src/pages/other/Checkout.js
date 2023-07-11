@@ -12,6 +12,7 @@ import { isAuthenticated } from "../../helpers/auth";
 
 import { postAddress } from "../../helpers/postAddress";
 import { processPayment } from "../../helpers/paymentHepler";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const Checkout = ({ location, cartItems, currency }) => {
   const { pathname } = location;
@@ -191,6 +192,8 @@ const Checkout = ({ location, cartItems, currency }) => {
       </div>
     );
   };
+
+ 
   return (
     <Fragment>
       <MetaTags>
@@ -404,6 +407,7 @@ const Checkout = ({ location, cartItems, currency }) => {
             )}
           </div>
         </div>
+        
       </LayoutOne>
     </Fragment>
   );
